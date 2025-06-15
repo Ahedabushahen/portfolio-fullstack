@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id(map: "users_pkey") @default(autoincrement())
+  username String @unique(map: "users_username_key") @db.VarChar(100)
+  email    String @unique(map: "users_email_key") @db.VarChar(255)
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  tech_stack  String?
+  github_url  String?
+  live_url    String?
+  created_at  DateTime @default(now())
+}
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  level String
+}
+
+model Experience {
+  id          Int      @id @default(autoincrement())
+  company     String
+  role        String
+  start_date  DateTime
+  end_date    DateTime
+  description String?
+}
+
+model Education {
+  id             Int    @id @default(autoincrement())
+  institution    String
+  degree         String
+  field_of_study String
+  start_year     Int
+  end_year       Int
+}
+
+model Certification {
+  id              Int       @id @default(autoincrement())
+  title           String
+  issuer          String
+  issue_date      DateTime
+  expiration_date DateTime?
+  credential_url  String?
+}
+
+model Contact {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String
+  message      String
+  submitted_at DateTime @default(now())
+}
+
+model Media {
+  id       Int     @id @default(autoincrement())
+  type     String
+  url      String
+  alt_text String?
+}
+
+model Blog {
+  id           Int      @id @default(autoincrement())
+  title        String
+  content      String
+  published_at DateTime
+  author       String
+}
