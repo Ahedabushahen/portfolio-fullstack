@@ -57,12 +57,15 @@ model Certification {
 }
 
 model Contact {
-  id           Int      @id @default(autoincrement())
-  name         String
-  email        String
-  message      String
-  submitted_at DateTime @default(now())
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String
+  subject  String?   // ✅ make optional
+  message  String
+  reply    String?   @default("Not replied yet")
 }
+
+
 
 model Media {
   id       Int     @id @default(autoincrement())

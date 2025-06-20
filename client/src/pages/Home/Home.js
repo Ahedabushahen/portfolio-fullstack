@@ -7,7 +7,7 @@ const Home = () => {
       <div className="text-center mb-5">
         <h1 className="display-4">Welcome to My Portfolio</h1>
         <p className="lead">I’m a passionate fullstack developer creating modern and dynamic web applications.</p>
-        <a href="#projects" className="btn btn-primary btn-lg mt-3">Explore Projects</a>
+        <a href="projects" className="btn btn-primary btn-lg mt-3">Explore Projects</a>
       </div>
 
       <div className="row justify-content-center mt-5">

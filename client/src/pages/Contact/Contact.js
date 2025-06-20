@@ -1,4 +1,3 @@
-// src/pages/Contact/Contact.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -19,7 +18,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/api/contacts', {
+      await axios.post('http://localhost:5000/api/contact', {
         name: formData.fullName,
         email: formData.email,
         subject: formData.subject,
@@ -29,6 +28,7 @@ const Contact = () => {
       setStatus('✅ Message sent successfully!');
       setFormData({ fullName: '', email: '', subject: '', message: '' });
     } catch (err) {
+      console.error(err.response?.data || err.message);
       setStatus('❌ Failed to send message. Please try again.');
     }
   };
@@ -36,7 +36,7 @@ const Contact = () => {
   return (
     <div className="container mt-5 mb-5">
       <h2 className="text-center mb-4 text-primary">Contact Me</h2>
-      {status && <div className="alert alert-info">{status}</div>}
+      {status && <div className={`alert ${status.startsWith('✅') ? 'alert-success' : 'alert-danger'}`}>{status}</div>}
 
       <form onSubmit={handleSubmit} className="mx-auto" style={{ maxWidth: '600px' }}>
         <div className="mb-3">

@@ -1,51 +1,45 @@
-/* src/pages/AdminDashboard/AdminDashboard.css */
-.admin-dashboard {
-  padding: 60px 20px;
-  background-color: #f7f9fc;
-  min-height: 100vh;
-  text-align: center;
-}
-
-.admin-dashboard h2 {
-  font-size: 2.5rem;
-  color: #2c3e50;
-}
-
-.admin-dashboard p {
-  margin-top: 10px;
-  color: #555;
-  font-size: 1.1rem;
-}
-
-.dashboard-grid {
+.admin-layout {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
+  height: 100vh;
+  background-color: #f4f6f8;
 }
 
-.dashboard-card {
-  width: 200px;
-  padding: 30px 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Sidebar area */
+.admin-sidebar {
+  width: 250px;
+  background-color: #2f3e46;
+  color: white;
+  padding-top: 20px;
 }
 
-.dashboard-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+/* Right-hand panel */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px; /* aligns with sidebar */
 }
 
-.dashboard-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 8px;
-  color: #3498db;
+/* Main content container */
+.admin-content {
+  flex: 1;
+  padding: 20px 30px;
+  overflow-y: auto;
 }
 
-.dashboard-card span {
-  color: #7f8c8d;
+/* Optional: responsive adjustments */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .admin-main {
+    margin-left: 0;
+  }
 }

@@ -12,6 +12,7 @@ const ContactManager = () => {
     fullName: '',
     email: '',
     message: '',
+    reply: ''
   });
 
   useEffect(() => {
@@ -19,8 +20,12 @@ const ContactManager = () => {
   }, []);
 
   const fetchContacts = async () => {
-    const { data } = await getContacts();
-    setContacts(data);
+    try {
+      const { data } = await getContacts();
+      setContacts(data);
+    } catch (err) {
+      console.error('Fetch failed:', err);
+    }
   };
 
   const handleEditClick = (contact) => {
@@ -30,7 +35,7 @@ const ContactManager = () => {
 
   const handleCancelEdit = () => {
     setEditingId(null);
-    setEditedContact({ fullName: '', email: '', message: '' });
+    setEditedContact({ fullName: '', email: '', message: '', reply: '' });
   };
 
   const handleSaveEdit = async () => {
@@ -98,7 +103,7 @@ const ContactManager = () => {
         }
       `}</style>
 
-      <h2>Manage Contacts</h2>
+      <h2>Manage Messages</h2>
       {contacts.map((contact) => (
         <div key={contact.id} className="contact-card">
           {editingId === contact.id ? (
@@ -121,22 +126,24 @@ const ContactManager = () => {
                 value={editedContact.message}
                 onChange={handleChange}
               />
-              <button className="save-btn" onClick={handleSaveEdit}>
-                Save
-              </button>
-              <button className="cancel-btn" onClick={handleCancelEdit}>
-                Cancel
-              </button>
+              <textarea
+                name="reply"
+                rows="2"
+                placeholder="Reply"
+                value={editedContact.reply}
+                onChange={handleChange}
+              />
+              <button className="save-btn" onClick={handleSaveEdit}>Save</button>
+              <button className="cancel-btn" onClick={handleCancelEdit}>Cancel</button>
             </>
           ) : (
             <>
               <p><strong>Name:</strong> {contact.fullName}</p>
               <p><strong>Email:</strong> {contact.email}</p>
               <p><strong>Message:</strong> {contact.message}</p>
-              <button onClick={() => handleEditClick(contact)}>Edit</button>
-              <button className="delete-btn" onClick={() => handleDelete(contact.id)}>
-                Delete
-              </button>
+              <p><strong>Reply:</strong> {contact.reply || 'Not replied yet'}</p>
+              <button onClick={() => handleEditClick(contact)}>Reply</button>
+              <button className="delete-btn" onClick={() => handleDelete(contact.id)}>Delete</button>
             </>
           )}
         </div>

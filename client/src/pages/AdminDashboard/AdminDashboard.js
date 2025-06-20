@@ -1,38 +1,42 @@
-import React, { useState } from 'react';
-import './AdminDashboard.css';
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+
 import AdminSidebar from './components/AdminSidebar';
+import AdminTopbar from './components/AdminTopbar';
+
 import ProjectManager from './components/ProjectManager';
 import SkillManager from './components/SkillManager';
 import EducationManager from './components/EducationManager';
-import CertificationManager from './components/CertificationManager';
 import ExperienceManager from './components/ExperienceManager';
-import MediaManager from './components/MediaManager';
+import CertificationManager from './components/CertificationManager';
 import BlogManager from './components/BlogManager';
+import MediaManager from './components/MediaManager';
 import ContactManager from './components/ContactManager';
 import UserManager from './components/UserManager';
 
+import './AdminDashboard.css';
+
 const AdminDashboard = () => {
-  const [selectedTab, setSelectedTab] = useState('projects');
-
-  const renderContent = () => {
-    switch (selectedTab) {
-      case 'projects': return <ProjectManager />;
-      case 'skills': return <SkillManager />;
-      case 'education': return <EducationManager />;
-      case 'certifications': return <CertificationManager />;
-      case 'experience': return <ExperienceManager />;
-      case 'media': return <MediaManager />;
-      case 'blog': return <BlogManager />;
-      case 'contacts': return <ContactManager />;
-      case 'users': return <UserManager />;
-      default: return <ProjectManager />;
-    }
-  };
-
   return (
-    <div className="admin-dashboard d-flex">
-      <AdminSidebar setSelectedTab={setSelectedTab} />
-      <main className="p-4 flex-grow-1 bg-light">{renderContent()}</main>
+    <div className="admin-layout">
+      <AdminSidebar />
+      <div className="admin-main">
+        <AdminTopbar />
+        <div className="admin-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/admin/projects" />} />
+            <Route path="projects" element={<ProjectManager />} />
+            <Route path="skills" element={<SkillManager />} />
+            <Route path="education" element={<EducationManager />} />
+            <Route path="experience" element={<ExperienceManager />} />
+            <Route path="certifications" element={<CertificationManager />} />
+            <Route path="blogs" element={<BlogManager />} />
+            <Route path="media" element={<MediaManager />} />
+            <Route path="contact" element={<ContactManager />} />
+            <Route path="users" element={<UserManager />} />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 };

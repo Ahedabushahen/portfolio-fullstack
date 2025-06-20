@@ -17,6 +17,7 @@ const Login = () => {
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
       localStorage.setItem('adminToken', res.data.token);
+      localStorage.setItem('adminData', JSON.stringify(res.data.user));
       navigate('/admin');
     } catch (err) {
       setError('Invalid credentials');
@@ -28,20 +29,8 @@ const Login = () => {
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Admin Login</h2>
         {error && <p className="error">{error}</p>}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-          onChange={handleChange}
-        />
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
         <button type="submit">Login</button>
       </form>
     </div>

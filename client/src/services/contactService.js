@@ -1,6 +1,7 @@
-import api from './api';
+import axios from 'axios';
 
-export const getContacts = () => api.get('/contacts');
-export const createContact = (data) => api.post('/contacts', data);
-export const updateContact = (id, data) => api.put(`/contacts/${id}`, data);
-export const deleteContact = (id) => api.delete(`/contacts/${id}`);
+const BASE_URL = 'http://localhost:5000/api/contact';
+
+export const getContacts = () => axios.get(BASE_URL);
+export const updateContact = (id, data) => axios.put(`${BASE_URL}/${id}`, data);
+export const deleteContact = (id) => axios.delete(`${BASE_URL}/${id}`);

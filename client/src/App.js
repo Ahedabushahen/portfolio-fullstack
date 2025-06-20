@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -14,15 +15,17 @@ import Blog from './pages/Blog/Blog';
 import Contact from './pages/Contact/Contact';
 import Media from './pages/Media/Media';
 
+import AdminLogin from './pages/AdminLogin/Login';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
-import AdminLogin from './pages/AdminLogin/Login'; // ✅ Fixed import
+import ProtectedRoute from './pages/AdminDashboard/utils/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Header />
-      <main>
+      <main style={{ minHeight: '80vh', padding: '1rem' }}>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
@@ -34,9 +37,18 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/media" element={<Media />} />
 
-          {/* ✅ Admin Login and Dashboard */}
+          {/* Admin Auth */}
           <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+
+          {/* Admin Dashboard with nested routes */}
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />

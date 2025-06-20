@@ -4,7 +4,7 @@ const {
   getAllContacts,
   createContact,
   updateContact,
-  deleteContact
+  deleteContact,
 } = require('../controllers/contactController');
 
 router.get('/', getAllContacts);

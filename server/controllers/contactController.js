@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// Get all contact messages
+// GET: all contacts
 const getAllContacts = async (req, res) => {
   try {
     const contacts = await prisma.contact.findMany();
@@ -11,35 +11,35 @@ const getAllContacts = async (req, res) => {
   }
 };
 
-// Create a new contact message
+// POST: new contact
 const createContact = async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, subject, message } = req.body;
   try {
     const newContact = await prisma.contact.create({
       data: {
         name,
         email,
+        subject,
         message,
+        reply: 'Not replied yet', // default reply
       },
     });
     res.status(201).json(newContact);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to create contact message' });
   }
 };
 
-// Update contact message by ID
+// PUT: update contact
 const updateContact = async (req, res) => {
   const { id } = req.params;
-  const { name, email, message } = req.body;
+  const { name, email, subject, message, reply } = req.body;
+
   try {
     const updatedContact = await prisma.contact.update({
       where: { id: Number(id) },
-      data: {
-        name,
-        email,
-        message,
-      },
+      data: { name, email, subject, message, reply },
     });
     res.json(updatedContact);
   } catch (error) {
@@ -47,14 +47,12 @@ const updateContact = async (req, res) => {
   }
 };
 
-// Delete contact message by ID
+// DELETE
 const deleteContact = async (req, res) => {
   const { id } = req.params;
   try {
-    await prisma.contact.delete({
-      where: { id: Number(id) },
-    });
-    res.json({ message: 'Contact message deleted successfully' });
+    await prisma.contact.delete({ where: { id: Number(id) } });
+    res.json({ message: 'Contact deleted' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete contact message' });
   }
