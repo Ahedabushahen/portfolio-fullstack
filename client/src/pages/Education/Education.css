@@ -1,0 +1,51 @@
+/* src/pages/Education/Education.css */
+.education {
+  padding: 60px 20px;
+  background-color: #ffffff;
+  min-height: 80vh;
+}
+
+.education-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2d3436;
+  margin-bottom: 40px;
+}
+
+.education-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.education-card {
+  background: #f9f9f9;
+  padding: 25px;
+  border-left: 6px solid #6c5ce7;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.education-card h3 {
+  margin: 0;
+  color: #6c5ce7;
+  font-size: 1.4rem;
+}
+
+.education-card .institution {
+  color: #636e72;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.education-card .duration {
+  color: #b2bec3;
+  margin: 5px 0;
+}
+
+.education-card .description {
+  margin-top: 10px;
+  line-height: 1.6;
+}

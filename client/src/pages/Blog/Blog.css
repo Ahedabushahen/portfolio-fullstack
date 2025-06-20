@@ -1,0 +1,44 @@
+/* src/pages/Blog/Blog.css */
+.blog-section {
+  padding: 60px 20px;
+  background: #ffffff;
+  min-height: 80vh;
+}
+
+.blog-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 40px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.blog-card {
+  background-color: #ecf0f1;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card h3 {
+  margin-top: 0;
+  color: #2980b9;
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 10px;
+}
+
+.blog-content {
+  color: #2c3e50;
+  line-height: 1.6;
+}
