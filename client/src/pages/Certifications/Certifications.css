@@ -1,52 +1,48 @@
 /* src/pages/Certifications/Certifications.css */
-.certifications {
-  padding: 60px 20px;
-  background: #f8f9fa;
-  min-height: 80vh;
+
+.container {
+  max-width: 1000px;
+  margin: auto;
 }
 
-.certifications-title {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #2d3436;
+h2 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #343a40;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
   margin-bottom: 40px;
 }
 
-.certifications-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 25px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
 .certification-card {
-  background: #fff;
-  padding: 20px;
-  border-left: 5px solid #00cec9;
-  border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
 }
 
-.certification-card h3 {
-  margin: 0;
-  color: #00cec9;
+.certification-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-.certification-card .issuer {
-  color: #636e72;
-  font-style: italic;
-  margin-top: 5px;
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #007bff;
 }
 
-.certification-card .date {
-  color: #b2bec3;
-  font-size: 0.9rem;
-  margin: 4px 0;
+.card-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-.certification-card .description {
+.card-text {
   margin-top: 10px;
-  color: #2d3436;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.card-dates {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #6c757d;
 }

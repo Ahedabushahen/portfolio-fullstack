@@ -1,45 +1,33 @@
 /* src/pages/Skills/Skills.css */
-.skills {
-  padding: 60px 20px;
-  background: #ffffff;
-  min-height: 80vh;
+
+.skills-container {
+  max-width: 1000px;
+  margin: auto;
 }
 
-.skills-title {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #2c3e50;
+.skills-container h2 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #343a40;
+  border-bottom: 2px solid #28a745;
+  padding-bottom: 10px;
   margin-bottom: 40px;
 }
 
-.skills-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
 .skill-card {
-  background: #f1f1f1;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07);
-  transition: transform 0.2s ease-in-out;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  border: none;
+  background-color: #f9f9f9;
 }
 
 .skill-card:hover {
   transform: scale(1.05);
+  background-color: #e9f7ef;
 }
 
-.skill-card h3 {
-  color: #34495e;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-}
-
-.skill-card p {
-  color: #777;
-  font-size: 1rem;
+.card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #28a745;
 }

@@ -1,41 +1,40 @@
-// src/pages/AdminDashboard/AdminDashboard.js
-import React from 'react';
+import React, { useState } from 'react';
 import './AdminDashboard.css';
-import { useNavigate } from 'react-router-dom';
+import AdminSidebar from './components/AdminSidebar';
+import ProjectManager from './components/ProjectManager';
+import SkillManager from './components/SkillManager';
+import EducationManager from './components/EducationManager';
+import CertificationManager from './components/CertificationManager';
+import ExperienceManager from './components/ExperienceManager';
+import MediaManager from './components/MediaManager';
+import BlogManager from './components/BlogManager';
+import ContactManager from './components/ContactManager';
+import UserManager from './components/UserManager';
 
-function AdminDashboard() {
-  const navigate = useNavigate();
+const AdminDashboard = () => {
+  const [selectedTab, setSelectedTab] = useState('projects');
 
-  const sections = [
-    { label: 'Projects', path: '/projects' },
-    { label: 'Skills', path: '/skills' },
-    { label: 'Experience', path: '/experience' },
-    { label: 'Education', path: '/education' },
-    { label: 'Certifications', path: '/certifications' },
-    { label: 'Media', path: '/media' },
-    { label: 'Blog', path: '/blog' },
-    { label: 'Contact Messages', path: '/contact' },
-    { label: 'User Info', path: '/about' }
-  ];
+  const renderContent = () => {
+    switch (selectedTab) {
+      case 'projects': return <ProjectManager />;
+      case 'skills': return <SkillManager />;
+      case 'education': return <EducationManager />;
+      case 'certifications': return <CertificationManager />;
+      case 'experience': return <ExperienceManager />;
+      case 'media': return <MediaManager />;
+      case 'blog': return <BlogManager />;
+      case 'contacts': return <ContactManager />;
+      case 'users': return <UserManager />;
+      default: return <ProjectManager />;
+    }
+  };
 
   return (
-    <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
-      <p>Manage all sections of your portfolio from one place.</p>
-      <div className="dashboard-grid">
-        {sections.map((section) => (
-          <div
-            key={section.label}
-            className="dashboard-card"
-            onClick={() => navigate(section.path)}
-          >
-            <h3>{section.label}</h3>
-            <span>Manage</span>
-          </div>
-        ))}
-      </div>
+    <div className="admin-dashboard d-flex">
+      <AdminSidebar setSelectedTab={setSelectedTab} />
+      <main className="p-4 flex-grow-1 bg-light">{renderContent()}</main>
     </div>
   );
-}
+};
 
 export default AdminDashboard;

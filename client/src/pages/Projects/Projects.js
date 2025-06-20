@@ -1,42 +1,52 @@
 // src/pages/Projects/Projects.js
+
 import React, { useEffect, useState } from 'react';
 import { getProjects } from '../../services/projectService';
 import './Projects.css';
 
-function Projects() {
+const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    async function fetchProjects() {
+    const fetchProjects = async () => {
       try {
-        const response = await getProjects();
-        setProjects(response.data);
+        const res = await getProjects();
+        setProjects(res.data);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error('Failed to fetch projects:', error);
       }
-    }
+    };
 
     fetchProjects();
   }, []);
 
   return (
-    <div className="projects">
-      <h2 className="projects-title">My Projects</h2>
-      <div className="projects-grid">
+    <div className="projects-container py-5">
+      <h2 className="text-center mb-4">My Projects</h2>
+      <div className="row">
         {projects.map((project) => (
-          <div className="project-card" key={project.id}>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            {project.link && (
-              <a href={project.link} target="_blank" rel="noopener noreferrer">
-                View Project
-              </a>
-            )}
+          <div className="col-md-6 col-lg-4 mb-4" key={project.id}>
+            <div className="card project-card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">{project.title}</h5>
+                <p className="card-text">{project.description}</p>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline-primary btn-sm mt-2"
+                  >
+                    View Project
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Projects;

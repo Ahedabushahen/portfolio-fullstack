@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Projects from './pages/Projects/Projects';
@@ -12,7 +13,9 @@ import Certifications from './pages/Certifications/Certifications';
 import Blog from './pages/Blog/Blog';
 import Contact from './pages/Contact/Contact';
 import Media from './pages/Media/Media';
+
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import AdminLogin from './pages/AdminLogin/Login'; // ✅ Fixed import
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/media" element={<Media />} />
+
+          {/* ✅ Admin Login and Dashboard */}
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </main>

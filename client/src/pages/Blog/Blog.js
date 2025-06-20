@@ -1,38 +1,43 @@
 // src/pages/Blog/Blog.js
+
 import React, { useEffect, useState } from 'react';
 import { getBlogs } from '../../services/blogService';
 import './Blog.css';
 
-function Blog() {
+const Blog = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    async function fetchBlogs() {
+    const fetchBlogs = async () => {
       try {
-        const response = await getBlogs();
-        setBlogs(response.data);
+        const res = await getBlogs();
+        setBlogs(res.data);
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
-    }
+    };
 
     fetchBlogs();
   }, []);
 
   return (
-    <div className="blog-section">
-      <h2 className="blog-title">Latest Blog Posts</h2>
-      <div className="blog-grid">
-        {blogs.map(blog => (
-          <div className="blog-card" key={blog.id}>
-            <h3>{blog.title}</h3>
-            <p className="blog-date">{new Date(blog.date).toLocaleDateString()}</p>
-            <p className="blog-content">{blog.content}</p>
+    <div className="blog-container py-5">
+      <h2 className="text-center mb-4">My Blog</h2>
+      <div className="row">
+        {blogs.map((blog) => (
+          <div className="col-md-6 mb-4" key={blog.id}>
+            <div className="card blog-card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">{blog.title}</h5>
+                <p className="card-meta text-muted mb-2">Posted on: {blog.date}</p>
+                <p className="card-text">{blog.content}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Blog;

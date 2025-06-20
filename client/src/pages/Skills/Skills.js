@@ -1,37 +1,42 @@
 // src/pages/Skills/Skills.js
+
 import React, { useEffect, useState } from 'react';
 import { getSkills } from '../../services/skillService';
 import './Skills.css';
 
-function Skills() {
+const Skills = () => {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    async function fetchSkills() {
+    const fetchSkills = async () => {
       try {
-        const response = await getSkills();
-        setSkills(response.data);
+        const res = await getSkills();
+        setSkills(res.data);
       } catch (error) {
-        console.error('Error fetching skills:', error);
+        console.error('Failed to fetch skills:', error);
       }
-    }
+    };
 
     fetchSkills();
   }, []);
 
   return (
-    <div className="skills">
-      <h2 className="skills-title">My Skills</h2>
-      <div className="skills-list">
+    <div className="skills-container py-5">
+      <h2 className="text-center mb-4">My Skills</h2>
+      <div className="row justify-content-center">
         {skills.map((skill) => (
-          <div className="skill-card" key={skill.id}>
-            <h3>{skill.name}</h3>
-            <p>Level: {skill.level}</p>
+          <div className="col-md-4 col-lg-3 mb-4" key={skill.id}>
+            <div className="card skill-card text-center shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">{skill.name}</h5>
+                <p className="card-text">{skill.level}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Skills;

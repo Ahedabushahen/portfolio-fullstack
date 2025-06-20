@@ -1,36 +1,17 @@
-/* src/pages/Home/Home.css */
-.home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 85vh;
-  background: linear-gradient(145deg, #ffffff, #f0f0f0);
-  text-align: center;
+.home-page {
+  background: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
 
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  color: #2c3e50;
+.home-page .display-4 {
+  font-weight: 600;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  margin-bottom: 30px;
+.home-card {
+  transition: transform 0.3s ease;
 }
 
-.cta-btn {
-  background-color: #3498db;
-  color: white;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.cta-btn:hover {
-  background-color: #2980b9;
+.home-card:hover {
+  transform: translateY(-8px);
 }

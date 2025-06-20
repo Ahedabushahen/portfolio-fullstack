@@ -1,51 +1,46 @@
 /* src/pages/Education/Education.css */
-.education {
-  padding: 60px 20px;
-  background-color: #ffffff;
-  min-height: 80vh;
+
+.container {
+  max-width: 1000px;
+  margin: auto;
 }
 
-.education-title {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #2d3436;
+h2 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #17a2b8;
+  border-bottom: 2px solid #17a2b8;
+  padding-bottom: 10px;
   margin-bottom: 40px;
 }
 
-.education-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
 }
 
-.education-card {
-  background: #f9f9f9;
-  padding: 25px;
-  border-left: 6px solid #6c5ce7;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.15);
 }
 
-.education-card h3 {
-  margin: 0;
-  color: #6c5ce7;
-  font-size: 1.4rem;
+.card-title {
+  font-size: 1.3rem;
+  color: #007bff;
+  font-weight: 600;
 }
 
-.education-card .institution {
-  color: #636e72;
+.card-subtitle {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.text-secondary {
+  font-size: 0.85rem;
   font-style: italic;
-  margin-top: 5px;
-}
-
-.education-card .duration {
-  color: #b2bec3;
-  margin: 5px 0;
-}
-
-.education-card .description {
-  margin-top: 10px;
-  line-height: 1.6;
 }

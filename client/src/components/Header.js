@@ -1,25 +1,25 @@
-import React from 'react';
+// Inside client/src/components/Header.js
 import { Link } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
-
   return (
-    <header className="header">
+    <header className="main-header">
       <div className="logo">My Portfolio</div>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/projects">Projects</Link>
-        <Link to="/skills">Skills</Link>
-        <Link to="/experience">Experience</Link>
-        <Link to="/education">Education</Link>
-        <Link to="/certifications">Certifications</Link>
-        <Link to="/blog">Blog</Link>
-        <Link to="/media">Media</Link>
-        <Link to="/contact">Contact</Link>
-        {isAdmin && <Link to="/admin">Admin</Link>}
+        <ul className="nav-links">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/projects">Projects</Link></li>
+          <li><Link to="/skills">Skills</Link></li>
+          <li><Link to="/experience">Experience</Link></li>
+          <li><Link to="/education">Education</Link></li>
+          <li><Link to="/certifications">Certifications</Link></li>
+          <li><Link to="/blog">Blog</Link></li>
+          <li><Link to="/media">Media</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link className="admin-link" to="/admin-login">Admin</Link></li>
+        </ul>
       </nav>
     </header>
   );
