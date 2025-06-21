@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const projectsRoutes = require('./routes/projectsRoutes');
 const skillsRoutes = require('./routes/skillsRoutes');
@@ -11,10 +12,9 @@ const contactRoutes = require('./routes/contactRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
-const aboutRoutes = require('./routes/aboutRoutes'); // ✅ Added
+const aboutRoutes = require('./routes/aboutRoutes');
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
@@ -28,11 +28,13 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/about', aboutRoutes); // ✅ Added
+app.use('/api/about', aboutRoutes);
 
-// Default root
-app.get('/', (req, res) => {
-  res.send('Welcome to the Portfolio API');
+// Serve static frontend (React)
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 module.exports = app;
