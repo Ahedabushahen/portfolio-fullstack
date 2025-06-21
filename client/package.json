@@ -1,5 +1,4 @@
 {
-  "homepage": "./",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -10,7 +9,6 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
-    "portfolio-fullstack": "file:..",
     "quill": "^2.0.3",
     "react": "^18.2.0",
     "react-bootstrap-icons": "^1.11.6",
