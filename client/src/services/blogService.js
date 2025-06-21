@@ -1,6 +1,8 @@
-import api from './api';
+import axios from 'axios';
 
-export const getBlogs = () => api.get('/blogs');
-export const createBlog = (data) => api.post('/blogs', data);
-export const updateBlog = (id, data) => api.put(`/blogs/${id}`, data);
-export const deleteBlog = (id) => api.delete(`/blogs/${id}`);
+const API_URL = 'http://localhost:5000/api/blogs';
+
+export const getBlogs = () => axios.get(API_URL);
+export const createBlog = (data) => axios.post(API_URL, data);
+export const updateBlog = (id, data) => axios.put(`${API_URL}/${id}`, data);
+export const deleteBlog = (id) => axios.delete(`${API_URL}/${id}`);

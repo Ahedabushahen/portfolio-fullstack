@@ -6,89 +6,28 @@ import {
   deleteEducation,
 } from '../../../services/educationService';
 
-const styles = {
-  container: {
-    marginLeft: '250px',
-    padding: '100px 20px 40px',
-  },
-  heading: {
-    fontSize: '24px',
-    marginBottom: '20px',
-    fontWeight: 'bold',
-  },
-  form: {
-    display: 'flex',
-    gap: '10px',
-    flexWrap: 'wrap',
-    marginBottom: '20px',
-  },
-  input: {
-    padding: '8px',
-    fontSize: '14px',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-    flex: '1 1 200px',
-  },
-  button: {
-    padding: '8px 16px',
-    fontSize: '14px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-  },
-  th: {
-    backgroundColor: '#f8f9fa',
-    textAlign: 'left',
-    padding: '10px',
-    border: '1px solid #ddd',
-  },
-  td: {
-    padding: '10px',
-    border: '1px solid #ddd',
-  },
-  actions: {
-    display: 'flex',
-    gap: '8px',
-  },
-  deleteBtn: {
-    backgroundColor: '#dc3545',
-    color: '#fff',
-    border: 'none',
-    padding: '6px 10px',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-};
-
 const EducationManager = () => {
-  const [educationList, setEducationList] = useState([]);
+  const [education, setEducation] = useState([]);
   const [form, setForm] = useState({
-    school: '',
+    institution: '',
     degree: '',
-    field: '',
-    startDate: '',
-    endDate: '',
+    field_of_study: '',
+    start_year: '',
+    end_year: '',
   });
   const [editId, setEditId] = useState(null);
 
   useEffect(() => {
-    fetchEducation();
+    loadEducation();
   }, []);
 
-  const fetchEducation = async () => {
+  const loadEducation = async () => {
     const res = await getEducation();
-    setEducationList(res.data);
+    setEducation(res.data);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,14 +37,14 @@ const EducationManager = () => {
       await createEducation(form);
     }
     setForm({
-      school: '',
+      institution: '',
       degree: '',
-      field: '',
-      startDate: '',
-      endDate: '',
+      field_of_study: '',
+      start_year: '',
+      end_year: '',
     });
     setEditId(null);
-    fetchEducation();
+    loadEducation();
   };
 
   const handleEdit = (item) => {
@@ -115,95 +54,145 @@ const EducationManager = () => {
 
   const handleDelete = async (id) => {
     await deleteEducation(id);
-    fetchEducation();
+    loadEducation();
   };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Manage Education</h2>
+    <div className="container mt-5">
+      <style>{`
+        .table th, .table td {
+          vertical-align: middle;
+        }
+        .form-control:focus {
+          box-shadow: none;
+        }
+        .btn-success {
+          background-color: #28a745;
+          border: none;
+        }
+        .btn-success:hover {
+          background-color: #218838;
+        }
+        .btn-primary {
+          background-color: #007bff;
+          border: none;
+        }
+        .btn-primary:hover {
+          background-color: #0069d9;
+        }
+        .btn-danger {
+          background-color: #dc3545;
+          border: none;
+        }
+        .btn-danger:hover {
+          background-color: #c82333;
+        }
+      `}</style>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          style={styles.input}
-          type="text"
-          name="school"
-          placeholder="School Name"
-          value={form.school}
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={styles.input}
-          type="text"
-          name="degree"
-          placeholder="Degree"
-          value={form.degree}
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={styles.input}
-          type="text"
-          name="field"
-          placeholder="Field of Study"
-          value={form.field}
-          onChange={handleChange}
-        />
-        <input
-          style={styles.input}
-          type="date"
-          name="startDate"
-          value={form.startDate}
-          onChange={handleChange}
-        />
-        <input
-          style={styles.input}
-          type="date"
-          name="endDate"
-          value={form.endDate}
-          onChange={handleChange}
-        />
-        <button style={styles.button} type="submit">
-          {editId ? 'Update' : 'Add'}
-        </button>
-      </form>
+      <div className="p-4 bg-white rounded shadow-sm">
+        <h2 className="text-center text-success fw-bold mb-3">🎓 Manage Education</h2>
+        <hr className="border border-success opacity-50" />
 
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>School</th>
-            <th style={styles.th}>Degree</th>
-            <th style={styles.th}>Field</th>
-            <th style={styles.th}>Start</th>
-            <th style={styles.th}>End</th>
-            <th style={styles.th}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {educationList.map((edu) => (
-            <tr key={edu.id}>
-              <td style={styles.td}>{edu.school}</td>
-              <td style={styles.td}>{edu.degree}</td>
-              <td style={styles.td}>{edu.field}</td>
-              <td style={styles.td}>{edu.startDate}</td>
-              <td style={styles.td}>{edu.endDate}</td>
-              <td style={styles.td}>
-                <div style={styles.actions}>
-                  <button style={styles.button} onClick={() => handleEdit(edu)}>
+        <form onSubmit={handleSubmit} className="row g-3 mb-4">
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              name="institution"
+              placeholder="Institution"
+              value={form.institution}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              name="degree"
+              placeholder="Degree"
+              value={form.degree}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              name="field_of_study"
+              placeholder="Field of Study"
+              value={form.field_of_study}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              type="number"
+              className="form-control"
+              name="start_year"
+              placeholder="Start Year"
+              value={form.start_year}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              type="number"
+              className="form-control"
+              name="end_year"
+              placeholder="End Year"
+              value={form.end_year}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-12 text-center">
+            <button type="submit" className="btn btn-success px-4">
+              {editId ? 'Update Education' : 'Add Education'}
+            </button>
+          </div>
+        </form>
+
+        <table className="table table-bordered table-hover">
+          <thead className="table-light">
+            <tr>
+              <th>Institution</th>
+              <th>Degree</th>
+              <th>Field</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {education.map((edu) => (
+              <tr key={edu.id}>
+                <td>{edu.institution}</td>
+                <td>{edu.degree}</td>
+                <td>{edu.field_of_study}</td>
+                <td>{edu.start_year}</td>
+                <td>{edu.end_year}</td>
+                <td>
+                  <button
+                    className="btn btn-primary btn-sm me-2"
+                    onClick={() => handleEdit(edu)}
+                  >
                     Edit
                   </button>
                   <button
-                    style={styles.deleteBtn}
+                    className="btn btn-danger btn-sm"
                     onClick={() => handleDelete(edu.id)}
                   >
                     Delete
                   </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,11 +19,18 @@ const Contact = () => {
     e.preventDefault();
 
     try {
+      // Send to Contact table
       await axios.post('http://localhost:5000/api/contact', {
         name: formData.fullName,
         email: formData.email,
         subject: formData.subject,
         message: formData.message,
+      });
+
+      // Save to Users table only if not exists
+      await axios.post('http://localhost:5000/api/users', {
+        fullName: formData.fullName, // <-- FIXED
+        email: formData.email,
       });
 
       setStatus('✅ Message sent successfully!');
@@ -34,60 +42,43 @@ const Contact = () => {
   };
 
   return (
-    <div className="container mt-5 mb-5">
-      <h2 className="text-center mb-4 text-primary">Contact Me</h2>
-      {status && <div className={`alert ${status.startsWith('✅') ? 'alert-success' : 'alert-danger'}`}>{status}</div>}
-
-      <form onSubmit={handleSubmit} className="mx-auto" style={{ maxWidth: '600px' }}>
-        <div className="mb-3">
-          <label className="form-label">Full Name</label>
-          <input
-            type="text"
-            name="fullName"
-            className="form-control"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Email address</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Subject</label>
-          <input
-            type="text"
-            name="subject"
-            className="form-control"
-            value={formData.subject}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Message</label>
-          <textarea
-            name="message"
-            className="form-control"
-            rows="5"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-
-        <button type="submit" className="btn btn-primary w-100">Send Message</button>
+    <div className="contact-container">
+      <h2>Contact Me</h2>
+      <form onSubmit={handleSubmit} className="contact-form">
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          value={formData.subject}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          rows="5"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        ></textarea>
+        <button type="submit">Send Message</button>
+        {status && <p className="status">{status}</p>}
       </form>
     </div>
   );

@@ -13,7 +13,7 @@ import Education from './pages/Education/Education';
 import Certifications from './pages/Certifications/Certifications';
 import Blog from './pages/Blog/Blog';
 import Contact from './pages/Contact/Contact';
-import Media from './pages/Media/Media';
+
 
 import AdminLogin from './pages/AdminLogin/Login';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
@@ -35,7 +35,7 @@ function App() {
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/media" element={<Media />} />
+        
 
           {/* Admin Auth */}
           <Route path="/admin-login" element={<AdminLogin />} />

@@ -1,33 +1,37 @@
 /* src/pages/Experience/Experience.css */
 
-.container {
-  max-width: 1000px;
+.experience-page {
+  max-width: 1140px;
   margin: auto;
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+  border-radius: 1rem;
+  padding: 20px;
 }
 
 h2 {
   font-weight: 700;
   font-size: 2.2rem;
-  color: #343a40;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 10px;
+  color: #0d6efd;
+  border-bottom: 2px solid #0d6efd;
+  padding-bottom: 12px;
   margin-bottom: 40px;
 }
 
 .experience-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 10px;
+  border-radius: 1rem;
+  background-color: #ffffff;
 }
 
 .experience-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
 .card-title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #007bff;
+  color: #0d6efd;
 }
 
 .card-subtitle {

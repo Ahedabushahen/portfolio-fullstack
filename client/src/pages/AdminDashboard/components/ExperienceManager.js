@@ -8,7 +8,14 @@ import {
 
 const ExperienceManager = () => {
   const [experience, setExperience] = useState([]);
-  const [formData, setFormData] = useState({ title: '', company: '', duration: '' });
+  const [formData, setFormData] = useState({
+    company: '',
+    role: '',
+    start_date: '',
+    end_date: '',
+    description: ''
+  });
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     loadExperience();
@@ -19,11 +26,30 @@ const ExperienceManager = () => {
     setExperience(data);
   };
 
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createExperience(formData);
-    setFormData({ title: '', company: '', duration: '' });
+    if (editId) {
+      await updateExperience(editId, formData);
+    } else {
+      await createExperience(formData);
+    }
+    setFormData({
+      company: '',
+      role: '',
+      start_date: '',
+      end_date: '',
+      description: ''
+    });
+    setEditId(null);
     loadExperience();
+  };
+
+  const handleEdit = (item) => {
+    setFormData(item);
+    setEditId(item.id);
   };
 
   const handleDelete = async (id) => {
@@ -31,113 +57,134 @@ const ExperienceManager = () => {
     loadExperience();
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
-    <div className="manager-container">
+    <div className="container mt-5 mb-5">
       <style>{`
-        .manager-container {
-          background: #fff;
-          border-radius: 8px;
-          padding: 2rem;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          max-width: 800px;
-          margin: auto;
+        .form-control, .form-control:focus {
+          box-shadow: none;
         }
-        .manager-container h2 {
-          margin-bottom: 1.5rem;
-          color: #2c3e50;
-          text-align: center;
-        }
-        .manager-form {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          justify-content: center;
-          margin-bottom: 20px;
-        }
-        .manager-form input {
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          flex: 1;
-          min-width: 200px;
-        }
-        .manager-form button {
-          padding: 10px 16px;
-          background-color: #2980b9;
-          color: white;
+        .btn-primary {
+          background-color: #007bff;
           border: none;
-          border-radius: 4px;
-          cursor: pointer;
         }
-        .manager-form button:hover {
-          background-color: #1f6391;
+        .btn-primary:hover {
+          background-color: #0069d9;
         }
-        .manager-list {
-          list-style: none;
-          padding: 0;
-        }
-        .manager-list li {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1rem;
-          background: #f9f9f9;
-          padding: 1rem;
-          border-radius: 4px;
-        }
-        .manager-list button {
-          background-color: #c0392b;
-          color: white;
+        .btn-danger {
+          background-color: #dc3545;
           border: none;
-          padding: 6px 10px;
-          border-radius: 4px;
-          cursor: pointer;
         }
-        .manager-list button:hover {
-          background-color: #962d22;
+        .btn-danger:hover {
+          background-color: #c82333;
+        }
+        .table td, .table th {
+          vertical-align: middle;
         }
       `}</style>
 
-      <h2>Manage Experience</h2>
-      <form onSubmit={handleSubmit} className="manager-form">
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="company"
-          placeholder="Company"
-          value={formData.company}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="duration"
-          placeholder="Duration"
-          value={formData.duration}
-          onChange={handleChange}
-        />
-        <button type="submit">Add Experience</button>
-      </form>
+      <div className="p-4 bg-white rounded shadow-sm">
+        <h2 className="text-center text-success fw-bold mb-3">
+          👨‍💼 Manage Experience
+        </h2>
+        <hr className="border border-success opacity-50" />
 
-      <ul className="manager-list">
-        {experience.map((item) => (
-          <li key={item.id}>
-            <div>
-              <strong>{item.title}</strong> at <em>{item.company}</em> ({item.duration})
-            </div>
-            <button onClick={() => handleDelete(item.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+        <form onSubmit={handleSubmit} className="row g-3 mb-4">
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              name="company"
+              placeholder="Company"
+              value={formData.company}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              name="role"
+              placeholder="Role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              type="date"
+              className="form-control"
+              name="start_date"
+              value={formData.start_date.split('T')[0]}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              type="date"
+              className="form-control"
+              name="end_date"
+              value={formData.end_date.split('T')[0]}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-12">
+            <textarea
+              className="form-control"
+              name="description"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+          <div className="col-12 text-center">
+            <button type="submit" className="btn btn-success px-5">
+              {editId ? 'Update Experience' : 'Add Experience'}
+            </button>
+          </div>
+        </form>
+
+        <table className="table table-bordered table-hover">
+          <thead className="table-light">
+            <tr>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {experience.map((item) => (
+              <tr key={item.id}>
+                <td>{item.company}</td>
+                <td>{item.role}</td>
+                <td>{item.start_date?.split('T')[0]}</td>
+                <td>{item.end_date?.split('T')[0]}</td>
+                <td>{item.description}</td>
+                <td>
+                  <button
+                    className="btn btn-primary btn-sm me-2"
+                    onClick={() => handleEdit(item)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

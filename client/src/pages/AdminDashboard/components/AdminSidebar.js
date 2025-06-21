@@ -1,61 +1,98 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const styles = {
-  sidebar: {
-    width: '250px',
-    height: '100vh',
-    backgroundColor: '#343a40',
-    color: 'white',
-    padding: '20px',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-  },
-  title: {
-    fontSize: '22px',
-    fontWeight: 'bold',
-    marginBottom: '30px',
-    textAlign: 'center',
-  },
-  navList: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  navItem: {
-    marginBottom: '20px',
-  },
-  navLink: {
-    color: 'white',
-    textDecoration: 'none',
-    fontSize: '16px',
-    display: 'block',
-    padding: '8px 12px',
-    borderRadius: '5px',
-    transition: 'background-color 0.2s ease-in-out',
-  },
-  navLinkHover: {
-    backgroundColor: '#495057',
-  }
-};
+import {
+  Kanban, Award, Book, Camera, Pen, ChatLeftText, People, BoxArrowRight
+} from 'react-bootstrap-icons';
 
 const AdminSidebar = () => {
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    window.location.href = '/admin-login';
+  };
+
   return (
-    <div style={styles.sidebar}>
-      <h2 style={styles.title}>Admin Panel</h2>
-      <ul style={styles.navList}>
-        <li style={styles.navItem}><Link to="/admin/projects" style={styles.navLink}>Projects</Link></li>
-        <li style={styles.navItem}><Link to="/admin/skills" style={styles.navLink}>Skills</Link></li>
-        <li style={styles.navItem}><Link to="/admin/experience" style={styles.navLink}>Experience</Link></li>
-        <li style={styles.navItem}><Link to="/admin/education" style={styles.navLink}>Education</Link></li>
-        <li style={styles.navItem}><Link to="/admin/certifications" style={styles.navLink}>Certifications</Link></li>
-        <li style={styles.navItem}><Link to="/admin/media" style={styles.navLink}>Media</Link></li>
-        <li style={styles.navItem}><Link to="/admin/blogs" style={styles.navLink}>Blogs</Link></li>
-        <li style={styles.navItem}><Link to="/admin/contact" style={styles.navLink}>Messages</Link></li>
-        <li style={styles.navItem}><Link to="/admin/users" style={styles.navLink}>Users</Link></li>
+    <div className="admin-sidebar">
+      <h2 className="sidebar-title">Admin Panel</h2>
+      <ul className="sidebar-links">
+        <li><Link to="/admin/about"><Book className="icon" /> About</Link></li>
+
+        <li><Link to="/admin/projects"><Kanban className="icon" /> Projects</Link></li>
+        <li><Link to="/admin/skills"><Award className="icon" /> Skills</Link></li>
+        <li><Link to="/admin/experience"><Book className="icon" /> Experience</Link></li>
+        <li><Link to="/admin/education"><Book className="icon" /> Education</Link></li>
+        <li><Link to="/admin/certifications"><Award className="icon" /> Certifications</Link></li>
+
+        <li><Link to="/admin/blogs"><Pen className="icon" /> Blogs</Link></li>
+        <li><Link to="/admin/contact"><ChatLeftText className="icon" /> Messages</Link></li>
+        <li><Link to="/admin/users"><People className="icon" /> Users</Link></li>
+        <li onClick={handleLogout} style={{ color: 'red', fontSize: '21px', cursor: 'pointer' }}>
+          <BoxArrowRight className="icon" /> Logout
+        </li>
+
       </ul>
     </div>
   );
 };
 
 export default AdminSidebar;
+
+/* ===== Embedded CSS ===== */
+const style = document.createElement('style');
+style.innerHTML = `
+.admin-sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #212529;
+  color: white;
+  padding: 30px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 35px;
+  text-align: center;
+  color: #f8f9fa;
+  border-bottom: 1px solid #495057;
+  padding-bottom: 10px;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-links li {
+  margin-bottom: 16px;
+}
+
+.sidebar-links li a,
+.sidebar-links li {
+  color: #dee2e6;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 6px;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+
+.sidebar-links li:hover,
+.sidebar-links li a:hover {
+  background-color: #495057;
+}
+
+.icon {
+  margin-right: 12px;
+  font-size: 18px;
+}
+`;
+document.head.appendChild(style);

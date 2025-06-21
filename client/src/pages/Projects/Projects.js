@@ -22,20 +22,21 @@ const Projects = () => {
 
   return (
     <div className="projects-container py-5">
-      <h2 className="text-center mb-4">My Projects</h2>
-      <div className="row">
+      <h2 className="text-center text-primary mb-5">My Projects</h2>
+
+      <div className="row g-4">
         {projects.map((project) => (
-          <div className="col-md-6 col-lg-4 mb-4" key={project.id}>
-            <div className="card project-card shadow-sm">
-              <div className="card-body">
+          <div className="col-md-6 col-lg-4" key={project.id}>
+            <div className="card project-card h-100 shadow-sm border-0">
+              <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{project.title}</h5>
-                <p className="card-text">{project.description}</p>
+                <p className="card-text text-muted">{project.description}</p>
                 {project.link && (
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-outline-primary btn-sm mt-2"
+                    className="btn btn-outline-primary mt-auto"
                   >
                     View Project
                   </a>

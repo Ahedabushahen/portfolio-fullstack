@@ -13,14 +13,13 @@ const getAllCertifications = async (req, res) => {
 
 // Create a new certification
 const createCertification = async (req, res) => {
-  const { title, issuer, issue_date, expiration_date, credential_url } = req.body;
+  const { title, issuer, issue_date,  credential_url } = req.body;
   try {
     const newCert = await prisma.certification.create({
       data: {
         title,
         issuer,
         issue_date: new Date(issue_date),
-        expiration_date: expiration_date ? new Date(expiration_date) : null,
         credential_url,
       },
     });
@@ -33,7 +32,7 @@ const createCertification = async (req, res) => {
 // Update certification
 const updateCertification = async (req, res) => {
   const { id } = req.params;
-  const { title, issuer, issue_date, expiration_date, credential_url } = req.body;
+  const { title, issuer, issue_date,  credential_url } = req.body;
   try {
     const updatedCert = await prisma.certification.update({
       where: { id: Number(id) },
@@ -41,7 +40,6 @@ const updateCertification = async (req, res) => {
         title,
         issuer,
         issue_date: new Date(issue_date),
-        expiration_date: expiration_date ? new Date(expiration_date) : null,
         credential_url,
       },
     });

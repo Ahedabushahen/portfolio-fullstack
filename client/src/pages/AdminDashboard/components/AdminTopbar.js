@@ -1,21 +1,24 @@
+// src/pages/AdminDashboard/components/AdminTopbar.js
 import React from 'react';
 
+// Inline CSS
 const styles = {
   topbar: {
     height: '60px',
-    width: '100%',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
+    borderBottom: '1px solid #dee2e6',
     padding: '0 25px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderBottom: '1px solid #dee2e6',
-    marginBottom: '15px',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
   },
-  left: {
+  title: {
     fontWeight: 'bold',
-    fontSize: '20px',
-    color: '#343a40',
+    fontSize: '1.25rem',
+    color: '#0d6efd',
   },
   right: {
     display: 'flex',
@@ -23,14 +26,14 @@ const styles = {
     gap: '15px',
   },
   welcome: {
-    fontSize: '14px',
-    color: '#495057',
+    fontSize: '0.9rem',
+    color: '#6c757d',
   },
   avatar: {
     width: '36px',
     height: '36px',
-    borderRadius: '50%',
     backgroundColor: '#dee2e6',
+    borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -39,13 +42,13 @@ const styles = {
     fontSize: '14px',
   },
   logoutBtn: {
-    backgroundColor: '#dc3545',
-    color: 'white',
-    border: 'none',
     padding: '6px 12px',
+    backgroundColor: '#dc3545',
+    color: '#fff',
+    border: 'none',
     borderRadius: '4px',
+    fontSize: '0.9rem',
     cursor: 'pointer',
-    fontSize: '14px',
   },
 };
 
@@ -58,11 +61,11 @@ const AdminTopbar = () => {
 
   return (
     <div style={styles.topbar}>
-      <div style={styles.left}>Admin Dashboard</div>
+      <div style={styles.title}>Admin Dashboard</div>
       <div style={styles.right}>
-        <div style={styles.welcome}>Welcome, Admin 👋</div>
+        <span style={styles.welcome}>Welcome, Admin 👋</span>
         <div style={styles.avatar}>A</div>
-        <button style={styles.logoutBtn} onClick={handleLogout}>Logout</button>
+ 
       </div>
     </div>
   );

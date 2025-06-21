@@ -1,6 +1,8 @@
-import api from './api';
+import axios from 'axios';
 
-export const getCertifications = () => api.get('/certifications');
-export const createCertification = (data) => api.post('/certifications', data);
-export const updateCertification = (id, data) => api.put(`/certifications/${id}`, data);
-export const deleteCertification = (id) => api.delete(`/certifications/${id}`);
+const API_URL = 'http://localhost:5000/api/certifications';
+
+export const getCertifications = () => axios.get(API_URL);
+export const createCertification = (data) => axios.post(API_URL, data);
+export const updateCertification = (id, data) => axios.put(`${API_URL}/${id}`, data);
+export const deleteCertification = (id) => axios.delete(`${API_URL}/${id}`);

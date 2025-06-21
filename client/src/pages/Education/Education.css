@@ -1,8 +1,11 @@
 /* src/pages/Education/Education.css */
 
-.container {
-  max-width: 1000px;
+.education-page {
+  max-width: 1140px;
   margin: auto;
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+  border-radius: 1rem;
+  padding: 20px;
 }
 
 h2 {
@@ -10,18 +13,19 @@ h2 {
   font-size: 2.2rem;
   color: #17a2b8;
   border-bottom: 2px solid #17a2b8;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
   margin-bottom: 40px;
 }
 
-.card {
+.education-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 10px;
+  border-radius: 1rem;
+  background-color: #ffffff;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.15);
+.education-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 123, 255, 0.1);
 }
 
 .card-title {

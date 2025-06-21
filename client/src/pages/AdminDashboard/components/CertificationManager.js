@@ -6,106 +6,62 @@ import {
   deleteCertification,
 } from '../../../services/certificationService';
 
-const styles = {
-  container: {
-    marginLeft: '250px',
-    padding: '100px 20px 40px',
-  },
-  heading: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '10px',
-    marginBottom: '20px',
-  },
-  input: {
-    padding: '10px',
-    fontSize: '14px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    flex: '1 1 250px',
-  },
-  button: {
-    backgroundColor: '#28a745',
-    color: '#fff',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    alignSelf: 'flex-start',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-  },
-  th: {
-    backgroundColor: '#f1f1f1',
-    textAlign: 'left',
-    padding: '10px',
-    border: '1px solid #ccc',
-  },
-  td: {
-    padding: '10px',
-    border: '1px solid #ccc',
-  },
-  actionBtn: {
-    marginRight: '10px',
-    padding: '6px 12px',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  editBtn: {
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-  },
-  deleteBtn: {
-    backgroundColor: '#dc3545',
-    color: '#fff',
-    border: 'none',
-  },
-};
-
 const CertificationManager = () => {
   const [certifications, setCertifications] = useState([]);
-  const [form, setForm] = useState({
-    name: '',
-    organization: '',
-    issueDate: '',
+  const [editingId, setEditingId] = useState(null);
+  const [newCert, setNewCert] = useState({
+    title: '',
+    issuer: '',
+    issue_date: '',
+    credential_url: ''
   });
-  const [editId, setEditId] = useState(null);
+
+  const [editCert, setEditCert] = useState(null);
 
   useEffect(() => {
     fetchCertifications();
   }, []);
 
   const fetchCertifications = async () => {
-    const res = await getCertifications();
-    setCertifications(res.data);
-  };
-
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (editId) {
-      await updateCertification(editId, form);
-    } else {
-      await createCertification(form);
+    try {
+      const { data } = await getCertifications();
+      setCertifications(data);
+    } catch (err) {
+      console.error('Failed to fetch certifications', err);
     }
-    setForm({ name: '', organization: '', issueDate: '' });
-    setEditId(null);
-    fetchCertifications();
   };
 
-  const handleEdit = (cert) => {
-    setForm(cert);
-    setEditId(cert.id);
+  const handleChange = (e) => {
+    setNewCert({ ...newCert, [e.target.name]: e.target.value });
+  };
+
+  const handleEditChange = (e) => {
+    setEditCert({ ...editCert, [e.target.name]: e.target.value });
+  };
+
+  const handleEditClick = (cert) => {
+    setEditingId(cert.id);
+    setEditCert({
+      title: cert.title,
+      issuer: cert.issuer,
+      issue_date: cert.issue_date?.substring(0, 10) || '',
+      credential_url: cert.credential_url
+    });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setEditCert(null);
+  };
+
+  const handleSaveEdit = async () => {
+    try {
+      await updateCertification(editingId, editCert);
+      fetchCertifications();
+      handleCancelEdit();
+    } catch (err) {
+      console.error('Update failed', err);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -113,75 +69,105 @@ const CertificationManager = () => {
     fetchCertifications();
   };
 
+  const handleCreate = async () => {
+    try {
+      await createCertification(newCert);
+      fetchCertifications();
+      setNewCert({
+        title: '',
+        issuer: '',
+        issue_date: '',
+        credential_url: ''
+      });
+    } catch (err) {
+      console.error('Creation failed', err);
+    }
+  };
+
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Manage Certifications</h2>
+    <div className="certification-manager">
+      <style>{`
+        .certification-manager {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 2rem;
+          max-width: 900px;
+          margin: auto;
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+        .certification-manager h2 {
+          text-align: center;
+          margin-bottom: 1.5rem;
+          color: #2c3e50;
+        }
+        .certification-card {
+          background-color: #f9f9f9;
+          padding: 1rem;
+          margin-bottom: 1rem;
+          border-radius: 5px;
+        }
+        input, textarea {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        button {
+          margin-right: 8px;
+          padding: 6px 12px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .save-btn {
+          background-color: #2ecc71;
+          color: white;
+        }
+        .cancel-btn {
+          background-color: #bdc3c7;
+        }
+        .delete-btn {
+          background-color: #e74c3c;
+          color: white;
+        }
+      `}</style>
 
-      <form style={styles.form} onSubmit={handleSubmit}>
-        <input
-          style={styles.input}
-          type="text"
-          name="name"
-          placeholder="Certification Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={styles.input}
-          type="text"
-          name="organization"
-          placeholder="Organization"
-          value={form.organization}
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={styles.input}
-          type="date"
-          name="issueDate"
-          value={form.issueDate}
-          onChange={handleChange}
-          required
-        />
-        <button style={styles.button} type="submit">
-          {editId ? 'Update' : 'Add'}
-        </button>
-      </form>
+      <h2>Manage Certifications</h2>
 
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>Name</th>
-            <th style={styles.th}>Organization</th>
-            <th style={styles.th}>Issue Date</th>
-            <th style={styles.th}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {certifications.map((cert) => (
-            <tr key={cert.id}>
-              <td style={styles.td}>{cert.name}</td>
-              <td style={styles.td}>{cert.organization}</td>
-              <td style={styles.td}>{cert.issueDate}</td>
-              <td style={styles.td}>
-                <button
-                  style={{ ...styles.actionBtn, ...styles.editBtn }}
-                  onClick={() => handleEdit(cert)}
-                >
-                  Edit
-                </button>
-                <button
-                  style={{ ...styles.actionBtn, ...styles.deleteBtn }}
-                  onClick={() => handleDelete(cert.id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Create New */}
+      <div className="certification-card">
+        <input name="title" placeholder="Title" value={newCert.title} onChange={handleChange} />
+        <input name="issuer" placeholder="Issuer" value={newCert.issuer} onChange={handleChange} />
+        <input name="issue_date" type="date" placeholder="Issue Date" value={newCert.issue_date} onChange={handleChange} />
+        <input name="credential_url" placeholder="Credential URL" value={newCert.credential_url} onChange={handleChange} />
+        <button className="save-btn" onClick={handleCreate}>Add Certification</button>
+      </div>
+
+      {/* Existing Certifications */}
+      {certifications.map((cert) => (
+        <div key={cert.id} className="certification-card">
+          {editingId === cert.id ? (
+            <>
+              <input name="title" value={editCert?.title || ''} onChange={handleEditChange} />
+              <input name="issuer" value={editCert?.issuer || ''} onChange={handleEditChange} />
+              <input name="issue_date" type="date" value={editCert?.issue_date || ''} onChange={handleEditChange} />
+              <input name="credential_url" value={editCert?.credential_url || ''} onChange={handleEditChange} />
+              <button className="save-btn" onClick={handleSaveEdit}>Save</button>
+              <button className="cancel-btn" onClick={handleCancelEdit}>Cancel</button>
+            </>
+          ) : (
+            <>
+              <p><strong>Title:</strong> {cert.title}</p>
+              <p><strong>Issuer:</strong> {cert.issuer}</p>
+              <p><strong>Issued:</strong> {cert.issue_date?.substring(0, 10)}</p>
+              <p><strong>Credential URL:</strong> <a href={cert.credential_url} target="_blank" rel="noopener noreferrer">{cert.credential_url}</a></p>
+              <button onClick={() => handleEditClick(cert)}>Edit</button>
+              <button className="delete-btn" onClick={() => handleDelete(cert.id)}>Delete</button>
+            </>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

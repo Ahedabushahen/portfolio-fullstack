@@ -21,17 +21,17 @@ const Experience = () => {
   }, []);
 
   return (
-    <div className="container py-5">
-      <h2 className="text-center mb-4">Experience</h2>
-      <div className="row">
+    <div className="experience-page container py-5">
+      <h2 className="text-center text-primary fw-bold mb-5">Experience</h2>
+      <div className="row g-4">
         {experience.map((item) => (
-          <div className="col-md-6 mb-4" key={item.id}>
-            <div className="card shadow-sm experience-card">
-              <div className="card-body">
+          <div className="col-md-6 col-lg-4" key={item.id}>
+            <div className="card experience-card h-100 shadow-sm border-0">
+              <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{item.position}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">{item.company}</h6>
-                <p className="card-text">{item.description}</p>
-                <p className="card-dates text-secondary">
+                <p className="card-text text-muted">{item.description}</p>
+                <p className="card-dates text-secondary mt-auto">
                   {item.startDate} – {item.endDate || 'Present'}
                 </p>
               </div>

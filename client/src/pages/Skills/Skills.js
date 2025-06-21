@@ -22,14 +22,15 @@ const Skills = () => {
 
   return (
     <div className="skills-container py-5">
-      <h2 className="text-center mb-4">My Skills</h2>
-      <div className="row justify-content-center">
+      <h2 className="text-center text-success mb-5">My Skills</h2>
+
+      <div className="row g-4 justify-content-center">
         {skills.map((skill) => (
-          <div className="col-md-4 col-lg-3 mb-4" key={skill.id}>
-            <div className="card skill-card text-center shadow-sm">
-              <div className="card-body">
+          <div className="col-md-4 col-lg-3" key={skill.id}>
+            <div className="card skill-card text-center shadow-sm h-100">
+              <div className="card-body d-flex flex-column justify-content-center">
                 <h5 className="card-title">{skill.name}</h5>
-                <p className="card-text">{skill.level}</p>
+                <p className="card-text text-muted">{skill.level}</p>
               </div>
             </div>
           </div>

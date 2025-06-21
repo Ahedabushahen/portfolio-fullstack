@@ -20,18 +20,18 @@ const Education = () => {
   }, []);
 
   return (
-    <div className="container mt-5 mb-5">
-      <h2 className="text-center mb-4 text-info">📘 My Education</h2>
-      <div className="row">
+    <div className="education-page container py-5">
+      <h2 className="text-center fw-bold text-info mb-5">📘 My Education</h2>
+      <div className="row g-4">
         {educationList.map((edu) => (
-          <div key={edu.id} className="col-md-6 mb-4">
-            <div className="card shadow-sm h-100 border-info">
-              <div className="card-body">
-                <h5 className="card-title text-primary">{edu.institution}</h5>
-                <p className="card-subtitle mb-2 text-muted">{edu.degree}</p>
-                <p className="card-text">{edu.description}</p>
-                <small className="text-secondary">
-                  {edu.startYear} - {edu.endYear || 'Present'}
+          <div key={edu.id} className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 education-card">
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title">{edu.institution}</h5>
+                <p className="card-subtitle text-muted">{edu.degree}</p>
+                <p className="card-text text-muted">{edu.description}</p>
+                <small className="text-secondary mt-auto">
+                  {edu.startYear} – {edu.endYear || 'Present'}
                 </small>
               </div>
             </div>

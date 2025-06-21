@@ -9,7 +9,7 @@ const ContactManager = () => {
   const [contacts, setContacts] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editedContact, setEditedContact] = useState({
-    fullName: '',
+    name: '',
     email: '',
     message: '',
     reply: ''
@@ -35,7 +35,7 @@ const ContactManager = () => {
 
   const handleCancelEdit = () => {
     setEditingId(null);
-    setEditedContact({ fullName: '', email: '', message: '', reply: '' });
+    setEditedContact({ name: '', email: '', message: '', reply: '' });
   };
 
   const handleSaveEdit = async () => {
@@ -110,8 +110,8 @@ const ContactManager = () => {
             <>
               <input
                 type="text"
-                name="fullName"
-                value={editedContact.fullName}
+                name="name"
+                value={editedContact.name}
                 onChange={handleChange}
               />
               <input
@@ -138,7 +138,7 @@ const ContactManager = () => {
             </>
           ) : (
             <>
-              <p><strong>Name:</strong> {contact.fullName}</p>
+              <p><strong>Name:</strong> {contact.name}</p>
               <p><strong>Email:</strong> {contact.email}</p>
               <p><strong>Message:</strong> {contact.message}</p>
               <p><strong>Reply:</strong> {contact.reply || 'Not replied yet'}</p>
