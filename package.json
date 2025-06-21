@@ -2,12 +2,10 @@
   "name": "portfolio-fullstack",
   "version": "1.0.0",
   "private": true,
- "scripts": {
-  "install-all": "npm install --prefix client && npm install --prefix server",
-  "start": "node server/server.js"
-
-}
-,
+  "scripts": {
+    "install-all": "npm install --prefix client && npm install --prefix server",
+    "start": "concurrently \"npm start --prefix server\" \"npm start --prefix client\""
+  },
   "dependencies": {
     "concurrently": "^8.2.0"
   }
