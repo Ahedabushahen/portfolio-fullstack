@@ -1,4 +1,3 @@
-// src/pages/Education/Education.js
 import React, { useEffect, useState } from 'react';
 import './Education.css';
 import { getEducation } from '../../services/educationService';
@@ -29,9 +28,9 @@ const Education = () => {
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{edu.institution}</h5>
                 <p className="card-subtitle text-muted">{edu.degree}</p>
-                <p className="card-text text-muted">{edu.description}</p>
+                <p className="card-text text-muted">{edu.field_of_study}</p>
                 <small className="text-secondary mt-auto">
-                  {edu.startYear} – {edu.endYear || 'Present'}
+                  {edu.start_year} – {edu.end_year}
                 </small>
               </div>
             </div>

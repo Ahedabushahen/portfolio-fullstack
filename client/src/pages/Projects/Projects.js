@@ -1,5 +1,3 @@
-// src/pages/Projects/Projects.js
-
 import React, { useEffect, useState } from 'react';
 import { getProjects } from '../../services/projectService';
 import './Projects.css';
@@ -31,9 +29,9 @@ const Projects = () => {
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{project.title}</h5>
                 <p className="card-text text-muted">{project.description}</p>
-                {project.link && (
+                {project.live_url && (
                   <a
-                    href={project.link}
+                    href={project.live_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline-primary mt-auto"

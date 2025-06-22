@@ -92,18 +92,34 @@ const ProjectManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      title: form.title,
+      description: form.description,
+      image: form.image,
+      github_url: form.github,
+      live_url: form.demo,
+    };
+
     if (editId) {
-      await updateProject(editId, form);
+      await updateProject(editId, payload);
     } else {
-      await createProject(form);
+      await createProject(payload);
     }
+
     setForm({ title: '', description: '', image: '', github: '', demo: '' });
     setEditId(null);
     fetchProjects();
   };
 
   const handleEdit = (project) => {
-    setForm(project);
+    setForm({
+      title: project.title || '',
+      description: project.description || '',
+      image: project.image || '',
+      github: project.github_url || '',
+      demo: project.live_url || '',
+    });
     setEditId(project.id);
   };
 
@@ -178,8 +194,12 @@ const ProjectManager = () => {
               <td style={styles.td}>{proj.description}</td>
               <td style={styles.td}>
                 <div style={styles.actions}>
-                  <button style={styles.button} onClick={() => handleEdit(proj)}>Edit</button>
-                  <button style={styles.deleteBtn} onClick={() => handleDelete(proj.id)}>Delete</button>
+                  <button style={styles.button} onClick={() => handleEdit(proj)}>
+                    Edit
+                  </button>
+                  <button style={styles.deleteBtn} onClick={() => handleDelete(proj.id)}>
+                    Delete
+                  </button>
                 </div>
               </td>
             </tr>

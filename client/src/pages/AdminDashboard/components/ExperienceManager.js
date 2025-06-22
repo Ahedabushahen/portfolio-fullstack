@@ -31,11 +31,21 @@ const ExperienceManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const start = new Date(formData.start_date);
+    const end = new Date(formData.end_date);
+
+    if (formData.end_date && start > end) {
+      alert('Start date must be before end date.');
+      return;
+    }
+
     if (editId) {
       await updateExperience(editId, formData);
     } else {
       await createExperience(formData);
     }
+
     setFormData({
       company: '',
       role: '',
@@ -48,7 +58,13 @@ const ExperienceManager = () => {
   };
 
   const handleEdit = (item) => {
-    setFormData(item);
+    setFormData({
+      company: item.company,
+      role: item.role,
+      start_date: item.start_date.split('T')[0],
+      end_date: item.end_date?.split('T')[0] || '',
+      description: item.description
+    });
     setEditId(item.id);
   };
 
@@ -116,7 +132,7 @@ const ExperienceManager = () => {
               type="date"
               className="form-control"
               name="start_date"
-              value={formData.start_date.split('T')[0]}
+              value={formData.start_date}
               onChange={handleChange}
               required
             />
@@ -126,7 +142,7 @@ const ExperienceManager = () => {
               type="date"
               className="form-control"
               name="end_date"
-              value={formData.end_date.split('T')[0]}
+              value={formData.end_date}
               onChange={handleChange}
             />
           </div>

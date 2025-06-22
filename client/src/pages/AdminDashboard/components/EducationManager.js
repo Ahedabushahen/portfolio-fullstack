@@ -31,11 +31,21 @@ const EducationManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const start = parseInt(form.start_year);
+    const end = parseInt(form.end_year);
+
+    if (form.end_year && start > end) {
+      alert('Start year must be before end year.');
+      return;
+    }
+
     if (editId) {
       await updateEducation(editId, form);
     } else {
       await createEducation(form);
     }
+
     setForm({
       institution: '',
       degree: '',
@@ -48,7 +58,13 @@ const EducationManager = () => {
   };
 
   const handleEdit = (item) => {
-    setForm(item);
+    setForm({
+      institution: item.institution,
+      degree: item.degree,
+      field_of_study: item.field_of_study,
+      start_year: item.start_year,
+      end_year: item.end_year || '',
+    });
     setEditId(item.id);
   };
 
