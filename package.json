@@ -6,7 +6,7 @@
     "install-all": "npm install --prefix client && npm install --prefix server",
     "build": "npm run build --prefix client",
     "generate": "cd server && npx prisma generate",
-    "start": "concurrently \"npm start --prefix server\" \"npm start --prefix client\""
+    "start": "concurrently \"npm start --prefix server\" \"serve -s client/build\""
 
   },
   "devDependencies": {
