@@ -53,11 +53,6 @@ const styles = {
 };
 
 const AdminTopbar = () => {
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminData');
-    window.location.href = '/';
-  };
 
   return (
     <div style={styles.topbar}>

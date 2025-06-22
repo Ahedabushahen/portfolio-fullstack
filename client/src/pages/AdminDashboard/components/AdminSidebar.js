@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Kanban, Award, Book, Camera, Pen, ChatLeftText, People, BoxArrowRight
+  Kanban, Award, Book, Pen, ChatLeftText, People, BoxArrowRight
 } from 'react-bootstrap-icons';
 
 const AdminSidebar = () => {
