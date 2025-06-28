@@ -39,7 +39,7 @@ model Experience {
   company     String
   role        String
   start_date  DateTime
-  end_date    DateTime?
+  end_date    DateTime
   description String?
 }
 
