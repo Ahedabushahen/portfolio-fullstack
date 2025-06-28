@@ -7,8 +7,9 @@ import {
 } from '../../../services/projectService';
 
 const styles = {
-  container: {
-    padding: "100px"
+   container: {
+   
+    padding: '100px'
        
   },
   heading: {
