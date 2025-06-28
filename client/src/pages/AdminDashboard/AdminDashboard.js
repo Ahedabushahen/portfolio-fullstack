@@ -14,7 +14,7 @@ import CertificationManager from './components/CertificationManager';
 import BlogManager from './components/BlogManager';
 import ContactManager from './components/ContactManager';
 import UserManager from './components/UserManager';
-import AboutManager from './components/AboutManager'; 
+import AboutManager from './components/AboutManager'; // ✅ Import added
 
 import './AdminDashboard.css';
 
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         <div className="admin-content">
           <Routes>
             <Route path="/" element={<Navigate to="/admin/about" />} />
-            <Route path="about" element={<AboutManager />} /> 
+            <Route path="about" element={<AboutManager />} /> {/* ✅ Add this */}
             <Route path="projects" element={<ProjectManager />} />
             <Route path="skills" element={<SkillManager />} />
             <Route path="education" element={<EducationManager />} />

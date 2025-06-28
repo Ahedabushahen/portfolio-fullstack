@@ -7,16 +7,14 @@ import {
 } from '../../../services/projectService';
 
 const styles = {
-   container: {
-   
-    padding: '100px'
-       
+  container: {
+    marginLeft: '250px',
+    padding: '100px 20px 40px',
   },
   heading: {
     fontSize: '24px',
     marginBottom: '20px',
     fontWeight: 'bold',
-    textAlign: 'center',
   },
   form: {
     display: 'flex',

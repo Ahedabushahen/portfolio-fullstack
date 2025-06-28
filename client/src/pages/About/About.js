@@ -4,8 +4,6 @@ import './About.css';
 import profileImg from '../../assets/profile.jpg'; 
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
-
-
 const About = () => {
   const [info, setInfo] = useState('');
 

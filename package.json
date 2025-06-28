@@ -7,10 +7,12 @@
     "build": "npm run build --prefix client",
     "generate": "cd server && npx prisma generate",
     "start": "concurrently \"npm start --prefix server\" \"serve -s client/build\""
-
   },
   "devDependencies": {
     "concurrently": "^9.2.0",
     "serve": "^14.2.0"
+  },
+  "dependencies": {
+    "react-icons": "^5.5.0"
   }
 }

@@ -31,8 +31,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/about', aboutRoutes);
 
+// ✅ Serve React frontend from build (MUST come after API routes)
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+// ✅ Catch-all for frontend routes (must come last!)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
