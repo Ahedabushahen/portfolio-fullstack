@@ -5,6 +5,7 @@
   min-height: 100vh;
   background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
   overflow: hidden;
+  border-radius: 20px;
 }
 
 /* Sidebar */
@@ -13,14 +14,15 @@
   background-color: #2f3e46;
   color: white;
   padding-top: 20px;
-  position: fixed;
+  position: static;
   height: 100vh;
-  z-index: 1000;
+  border-radius: 20px;
+
 }
 
 /* Main area */
 .admin-main {
-  margin-left: 250px;
+  margin-left: 60px;
   padding-top: 10px;
   flex: 1;
   display: flex;
@@ -33,7 +35,8 @@
   padding: 30px;
   overflow-y: auto;
   background-color: #ffffff;
-  border-top-left-radius: 1rem;
+  border-radius: 1rem;
+  
 }
 
 /* Responsive adjustments */
@@ -42,17 +45,11 @@
     flex-direction: column;
   }
 
-  .admin-sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
   .admin-main {
     margin-left: 0;
   }
 
   .admin-content {
-    border-top-left-radius: 0;
+    border-radius: 20px;
   }
 }

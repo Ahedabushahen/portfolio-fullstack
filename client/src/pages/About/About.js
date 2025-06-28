@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getAbout } from '../../services/aboutService';
 import './About.css';
+import profileImg from '../../assets/profile.jpg'; 
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
+
+
 
 const About = () => {
   const [info, setInfo] = useState('');
@@ -27,10 +31,29 @@ const About = () => {
         <div className="row align-items-center g-4">
           <div className="col-md-4 text-center">
             <img
-              src="/assets/profile.jpg"
+              src={profileImg}
               alt="Profile"
               className="img-fluid rounded-circle border border-primary profile-img"
             />
+            <div className="mt-3">
+              <a
+                href="https://www.linkedin.com/in/ahed-abu-shahen-8973ab2a9/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none me-3"
+              >
+                <FaLinkedin size={30} color="#0A66C2" />
+              </a>
+              <a
+                href="https://github.com/Ahedabushahen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none"
+              >
+                <FaGithub size={30} color="#333" />
+              </a>
+
+            </div>
           </div>
           <div className="col-md-8">
             <div className="lead text-muted" dangerouslySetInnerHTML={{ __html: info || 'Unable to load about information at the moment.' }} />

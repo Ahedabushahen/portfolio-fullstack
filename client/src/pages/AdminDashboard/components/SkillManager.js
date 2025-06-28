@@ -8,13 +8,13 @@ import {
 
 const styles = {
   container: {
-    marginLeft: '250px',
-    padding: '100px 20px 40px',
+    padding: "100px"
   },
   heading: {
     fontSize: '24px',
     marginBottom: '20px',
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   form: {
     display: 'flex',

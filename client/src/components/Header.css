@@ -1,29 +1,90 @@
-/* client/src/components/Header.css */
 .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 40px;
+  padding: 0 40px;
+  height: 70px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+}
+
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  height: 50px;
+  width: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo-hi {
+  margin-left: 10px;
+  font-size: 27px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  padding-left: 17px;
+}
+
+.wave {
+  display: inline-block;
+  margin-left: 5px;
+  transform-origin: 70% 70%;
+  animation: wave 2s infinite;
+}
+
+/* If you prefer only on hover:
+.wave {
+  display: inline-block;
+  margin-left: 5px;
+  transform-origin: 70% 70%;
+}
+
+.logo-hi:hover .wave {
+  animation: wave 1.5s infinite;
+}
+*/
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 20px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links li a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
+  font-size: 18px;
   transition: color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
 }
 
 .nav-links li a:hover {

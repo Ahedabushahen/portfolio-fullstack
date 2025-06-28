@@ -1,4 +1,3 @@
-// src/pages/Skills/Skills.js
 
 import React, { useEffect, useState } from 'react';
 import { getSkills } from '../../services/skillService';
