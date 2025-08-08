@@ -15,3 +15,19 @@
 .profile-img:hover {
   transform: scale(1.05);
 }
+
+.cv-download-btn {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+}
+
+.cv-download-btn:hover {
+  background: #0056b3;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.15);
+}
+
