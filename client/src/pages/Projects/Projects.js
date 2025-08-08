@@ -3,61 +3,45 @@ import { getProjects } from '../../services/projectService';
 import './Projects.css';
 
 const projectExtraData = {
-  'E-commerce Platform': {
-    main_image: 'https://placehold.co/600x300/0d6efd/fff?text=E-commerce',
-    youtube_url: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ',
-    detailed_description: 'A robust e-commerce platform for small businesses, featuring product management, order tracking, and secure payments. Built with React, Node.js, and MongoDB.',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    images: [
-      { url: 'https://placehold.co/400x200/0d6efd/fff?text=Product+Page', caption: 'Product Page' },
-      { url: 'https://placehold.co/400x200/198754/fff?text=Checkout', caption: 'Checkout Flow' }
-    ],
-    documents: [
-      { url: '/assets/Ahed%20Abu%20Shahen%20CV.pdf', name: 'Business Plan.pdf' }
-    ],
-    github_url: 'https://github.com/example/ecommerce-platform',
-    live_url: 'https://ecommerce.example.com',
-    createdAt: '2024-01-10T12:00:00Z',
-    updatedAt: '2025-07-15T09:30:00Z'
-  },
+  
   'Portfolio Website': {
-    main_image: 'https://placehold.co/600x300/6610f2/fff?text=Portfolio',
+    main_image: require('../../assets/portfolio-homepage.png'),
     youtube_url: '',
     detailed_description: 'A personal portfolio website built with React and Node.js, showcasing projects, skills, and contact information.',
     technologies: ['React', 'Node.js', 'Bootstrap'],
     images: [
-      { url: 'https://placehold.co/400x200/6610f2/fff?text=Home', caption: 'Home Page' }
+      { url: require('../../assets/contact-page.png'), caption: 'contact Page' }
     ],
     documents: [],
-    github_url: 'https://github.com/example/portfolio-website',
-    live_url: 'https://portfolio.example.com',
+    github_url: 'https://github.com/Ahedabushahen/portfolio-fullstack',
+    live_url: 'https://github.com/Ahedabushahen/portfolio-fullstack',
     createdAt: '2023-11-10T08:00:00Z',
     updatedAt: '2024-12-20T14:45:00Z'
   },
   'Shopping Cart': {
-    main_image: 'https://placehold.co/600x300/ffc107/333?text=Shopping+Cart',
+    main_image: require('../../assets/Shopping-cart-homepage.png'),
     youtube_url: '',
     detailed_description: 'A simple shopping web app built with TypeScript for managing products and cart features.',
     technologies: ['TypeScript', 'React', 'Redux'],
     images: [
-      { url: 'https://placehold.co/400x200/ffc107/333?text=Cart', caption: 'Cart Page' }
+      { url: require('../../assets/cart.png'), caption: 'Cart Page' }
     ],
     documents: [],
-    github_url: 'https://github.com/example/shopping-cart',
+    github_url: 'https://github.com/Ahedabushahen/Shopping-Cart',
     live_url: '',
     createdAt: '2024-03-05T10:00:00Z',
     updatedAt: '2025-06-01T11:00:00Z'
   },
   'Doctor Appointment Management System': {
-    main_image: 'https://placehold.co/600x300/198754/fff?text=Doctor+System',
+    main_image: require('../../assets/home-page.jpg'),
     youtube_url: '',
     detailed_description: 'A PHP system for managing doctor appointments with an admin dashboard, patient management, and notifications.',
     technologies: ['PHP', 'MySQL', 'Bootstrap'],
     images: [
-      { url: 'https://placehold.co/400x200/198754/fff?text=Admin+Dashboard', caption: 'Admin Dashboard' }
+      { url: require('../../assets/doctor-managment-project.jpg'), caption: 'Admin Dashboard' }
     ],
     documents: [],
-    github_url: 'https://github.com/example/doctor-appointment',
+    github_url: 'https://github.com/Ahedabushahen/Doctor-Appointment-Management-System',
     live_url: '',
     createdAt: '2023-09-15T09:00:00Z',
     updatedAt: '2024-10-10T13:00:00Z'
