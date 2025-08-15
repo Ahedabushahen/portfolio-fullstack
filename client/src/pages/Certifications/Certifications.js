@@ -1,10 +1,17 @@
+
+// Certifications component for displaying a list of certifications.
+// Fetches certification data from the API and renders certification cards.
 import React, { useEffect, useState } from 'react';
 import { getCertifications } from '../../services/certificationService';
 
+
+// Renders the certifications page and certification cards
 const Certifications = () => {
   const [certifications, setCertifications] = useState([]);
 
+  // Fetch certifications on component mount
   useEffect(() => {
+    // Fetches all certifications from the API and updates state
     const fetchCerts = async () => {
       try {
         const { data } = await getCertifications();
@@ -16,6 +23,7 @@ const Certifications = () => {
     fetchCerts();
   }, []);
 
+  // Format date string for display
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);

@@ -1,7 +1,12 @@
+
+// Contact component for displaying the contact form and handling submissions.
+// Sends messages to the backend and optionally saves user info.
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Contact.css';
 
+
+// Renders the contact form and handles user message submissions
 const Contact = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -11,10 +16,12 @@ const Contact = () => {
   });
   const [status, setStatus] = useState('');
 
+  // Handle input changes for contact form
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission, send message to backend, and save user info
   const handleSubmit = async (e) => {
     e.preventDefault();
 

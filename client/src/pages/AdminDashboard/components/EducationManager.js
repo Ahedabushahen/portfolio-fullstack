@@ -6,6 +6,7 @@ import {
   deleteEducation,
 } from '../../../services/educationService';
 
+// EducationManager component for managing education entries (add, edit, delete) in the admin dashboard.
 const EducationManager = () => {
   const [education, setEducation] = useState([]);
   const [form, setForm] = useState({
@@ -17,18 +18,22 @@ const EducationManager = () => {
   });
   const [editId, setEditId] = useState(null);
 
+  // Fetch education entries on component mount
   useEffect(() => {
     loadEducation();
   }, []);
 
+  // Fetches all education entries from the API and updates state
   const loadEducation = async () => {
     const res = await getEducation();
     setEducation(res.data);
   };
 
+  // Handle input changes for education form
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // Handle form submission for adding or updating an education entry
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,6 +62,7 @@ const EducationManager = () => {
     loadEducation();
   };
 
+  // Start editing an education entry
   const handleEdit = (item) => {
     setForm({
       institution: item.institution,
@@ -68,6 +74,7 @@ const EducationManager = () => {
     setEditId(item.id);
   };
 
+  // Delete an education entry
   const handleDelete = async (id) => {
     await deleteEducation(id);
     loadEducation();

@@ -6,6 +6,7 @@ import {
   deleteBlog,
 } from '../../../services/blogService';
 
+// BlogManager component for managing blog posts (add, edit, delete) in the admin dashboard.
 const BlogManager = () => {
   const [blogs, setBlogs] = useState([]);
   const [form, setForm] = useState({
@@ -15,18 +16,22 @@ const BlogManager = () => {
   });
   const [editId, setEditId] = useState(null);
 
+  // Fetch blog posts on component mount
   useEffect(() => {
     fetchBlogs();
   }, []);
 
+  // Fetches all blog posts from the API and updates state
   const fetchBlogs = async () => {
     const res = await getBlogs();
     setBlogs(res.data);
   };
 
+  // Handle input changes for blog form
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // Handle form submission for adding or updating a blog post
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editId) {
@@ -39,11 +44,13 @@ const BlogManager = () => {
     fetchBlogs();
   };
 
+  // Start editing a blog post
   const handleEdit = (blog) => {
     setForm(blog);
     setEditId(blog.id);
   };
 
+  // Delete a blog post
   const handleDelete = async (id) => {
     await deleteBlog(id);
     fetchBlogs();

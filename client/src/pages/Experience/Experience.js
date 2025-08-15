@@ -1,13 +1,20 @@
+
+// Experience component for displaying a list of work experiences.
+// Fetches experience data from the API and renders experience cards.
 // src/pages/Experience/Experience.js
 
 import React, { useEffect, useState } from 'react';
 import { getExperience } from '../../services/experienceService';
 import './Experience.css';
 
+
+// Renders the experience page and experience cards
 const Experience = () => {
   const [experience, setExperience] = useState([]);
 
+  // Fetch experience entries on component mount
   useEffect(() => {
+    // Fetches all experience entries from the API and updates state
     const fetchExperience = async () => {
       try {
         const res = await getExperience();
@@ -16,25 +23,25 @@ const Experience = () => {
         console.error('Failed to fetch experience:', error);
       }
     };
-
     fetchExperience();
   }, []);
 
+  // Format date string for display
   const formatDate = (dateString) => {
     return dateString ? dateString.slice(0, 10) : '';
   };
 
+  // Get label for end date ("Present" if ongoing)
   const getEndDateLabel = (endDate) => {
     if (!endDate) return 'Present';
-
     const end = new Date(endDate);
     const today = new Date();
     return end > today ? 'Present' : formatDate(endDate);
   };
 
+  // Calculate duration between start and end dates
   const getDuration = (startDate, endDate) => {
     const start = new Date(startDate);
-
     let end;
     if (!endDate) {
       end = new Date();
@@ -43,18 +50,14 @@ const Experience = () => {
       const today = new Date();
       end = parsedEnd > today ? today : parsedEnd;
     }
-
     let years = end.getFullYear() - start.getFullYear();
     let months = end.getMonth() - start.getMonth();
-
     if (months < 0) {
       years--;
       months += 12;
     }
-
     const yearsLabel = years > 0 ? `${years} year${years > 1 ? 's' : ''}` : '';
     const monthsLabel = months > 0 ? `${months} month${months > 1 ? 's' : ''}` : '';
-
     return `${yearsLabel}${yearsLabel && monthsLabel ? ' ' : ''}${monthsLabel}` || 'Less than a month';
   };
 

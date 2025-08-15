@@ -5,6 +5,7 @@ import {
   updateContact,
 } from '../../../services/contactService';
 
+// ContactManager component for managing contact messages (view, reply, delete) in the admin dashboard.
 const ContactManager = () => {
   const [contacts, setContacts] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -15,10 +16,12 @@ const ContactManager = () => {
     reply: ''
   });
 
+  // Fetch contact messages on component mount
   useEffect(() => {
     fetchContacts();
   }, []);
 
+  // Fetches all contact messages from the API and updates state
   const fetchContacts = async () => {
     try {
       const { data } = await getContacts();
@@ -28,27 +31,32 @@ const ContactManager = () => {
     }
   };
 
+  // Start editing (replying to) a contact message
   const handleEditClick = (contact) => {
     setEditingId(contact.id);
     setEditedContact(contact);
   };
 
+  // Cancel editing
   const handleCancelEdit = () => {
     setEditingId(null);
     setEditedContact({ name: '', email: '', message: '', reply: '' });
   };
 
+  // Save reply to a contact message
   const handleSaveEdit = async () => {
     await updateContact(editingId, editedContact);
     fetchContacts();
     handleCancelEdit();
   };
 
+  // Delete a contact message
   const handleDelete = async (id) => {
     await deleteContact(id);
     fetchContacts();
   };
 
+  // Handle input changes for editing contact message
   const handleChange = (e) => {
     setEditedContact({ ...editedContact, [e.target.name]: e.target.value });
   };

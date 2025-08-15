@@ -1,7 +1,9 @@
 // src/pages/AdminDashboard/components/AdminTopbar.js
+// AdminTopbar component for displaying the admin dashboard top navigation bar.
 import React from 'react';
 
 // Inline CSS
+// Inline CSS styles for the topbar
 const styles = {
   topbar: {
     height: '60px',
@@ -52,15 +54,14 @@ const styles = {
   },
 };
 
+// Renders the admin dashboard topbar with title and welcome message
 const AdminTopbar = () => {
-
   return (
     <div style={styles.topbar}>
       <div style={styles.title}>Admin Dashboard</div>
       <div style={styles.right}>
         <span style={styles.welcome}>Welcome, Admin 👋</span>
         <div style={styles.avatar}>A</div>
- 
       </div>
     </div>
   );

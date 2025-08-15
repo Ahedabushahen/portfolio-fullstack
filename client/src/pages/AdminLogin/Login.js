@@ -1,3 +1,6 @@
+
+// Login component for admin authentication page.
+// Handles admin login form, authentication, and navigation.
 // src/pages/Login/Login.js
 
 import React, { useState } from 'react';
@@ -5,15 +8,19 @@ import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
+// Renders the admin login form and handles authentication
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Handle input changes for login form
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission and authenticate admin
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

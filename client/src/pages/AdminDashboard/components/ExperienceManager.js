@@ -6,6 +6,7 @@ import {
   deleteExperience,
 } from '../../../services/experienceService';
 
+// ExperienceManager component for managing experience entries (add, edit, delete) in the admin dashboard.
 const ExperienceManager = () => {
   const [experience, setExperience] = useState([]);
   const [formData, setFormData] = useState({
@@ -17,18 +18,22 @@ const ExperienceManager = () => {
   });
   const [editId, setEditId] = useState(null);
 
+  // Fetch experience entries on component mount
   useEffect(() => {
     loadExperience();
   }, []);
 
+  // Fetches all experience entries from the API and updates state
   const loadExperience = async () => {
     const { data } = await getExperience();
     setExperience(data);
   };
 
+  // Handle input changes for experience form
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // Handle form submission for adding or updating an experience entry
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,6 +62,7 @@ const ExperienceManager = () => {
     loadExperience();
   };
 
+  // Start editing an experience entry
   const handleEdit = (item) => {
     setFormData({
       company: item.company,
@@ -68,6 +74,7 @@ const ExperienceManager = () => {
     setEditId(item.id);
   };
 
+  // Delete an experience entry
   const handleDelete = async (id) => {
     await deleteExperience(id);
     loadExperience();

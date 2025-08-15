@@ -5,10 +5,13 @@ import profileImg from '../../assets/profile.jpg';
 import cvFile from '../../assets/Ahed Abu Shahen CV.pdf'; // Import CV file
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
+// About page component that displays user profile, social links, and CV preview.
+// Fetches about information from the backend service.
 const About = () => {
   const [info, setInfo] = useState('');
 
   useEffect(() => {
+    // Fetches about information from the API and updates state.
     const fetchAbout = async () => {
       try {
         const res = await getAbout();

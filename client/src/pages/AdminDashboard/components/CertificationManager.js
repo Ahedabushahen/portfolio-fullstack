@@ -6,6 +6,7 @@ import {
   deleteCertification,
 } from '../../../services/certificationService';
 
+// CertificationManager component for managing certifications (add, edit, delete) in the admin dashboard.
 const CertificationManager = () => {
   const [certifications, setCertifications] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -18,10 +19,12 @@ const CertificationManager = () => {
 
   const [editCert, setEditCert] = useState(null);
 
+  // Fetch certifications on component mount
   useEffect(() => {
     fetchCertifications();
   }, []);
 
+  // Fetches all certifications from the API and updates state
   const fetchCertifications = async () => {
     try {
       const { data } = await getCertifications();
@@ -31,14 +34,17 @@ const CertificationManager = () => {
     }
   };
 
+  // Handle input changes for new certification form
   const handleChange = (e) => {
     setNewCert({ ...newCert, [e.target.name]: e.target.value });
   };
 
+  // Handle input changes for editing certification
   const handleEditChange = (e) => {
     setEditCert({ ...editCert, [e.target.name]: e.target.value });
   };
 
+  // Start editing a certification
   const handleEditClick = (cert) => {
     setEditingId(cert.id);
     setEditCert({
@@ -49,11 +55,13 @@ const CertificationManager = () => {
     });
   };
 
+  // Cancel editing
   const handleCancelEdit = () => {
     setEditingId(null);
     setEditCert(null);
   };
 
+  // Save edited certification
   const handleSaveEdit = async () => {
     try {
       await updateCertification(editingId, editCert);
@@ -64,11 +72,13 @@ const CertificationManager = () => {
     }
   };
 
+  // Delete a certification
   const handleDelete = async (id) => {
     await deleteCertification(id);
     fetchCertifications();
   };
 
+  // Create a new certification
   const handleCreate = async () => {
     try {
       await createCertification(newCert);

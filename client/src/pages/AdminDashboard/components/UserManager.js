@@ -5,6 +5,7 @@ import {
   updateUser,
 } from '../../../services/userService';
 
+// UserManager component for managing users (view, edit, delete) in the admin dashboard.
 const UserManager = () => {
   const [users, setUsers] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -13,36 +14,43 @@ const UserManager = () => {
     email: '',
   });
 
+  // Fetch users on component mount
   useEffect(() => {
     fetchUsers();
   }, []);
 
+  // Fetches all users from the API and updates state
   const fetchUsers = async () => {
     const { data } = await getUsers();
     setUsers(data);
   };
 
+  // Start editing a user
   const handleEditClick = (user) => {
     setEditingId(user.id);
     setEditedUser(user);
   };
 
+  // Cancel editing
   const handleCancelEdit = () => {
     setEditingId(null);
     setEditedUser({ fullName: '', email: '' });
   };
 
+  // Save edited user data
   const handleSaveEdit = async () => {
     await updateUser(editingId, editedUser);
     fetchUsers();
     handleCancelEdit();
   };
 
+  // Delete a user
   const handleDelete = async (id) => {
     await deleteUser(id);
     fetchUsers();
   };
 
+  // Handle input changes for editing user
   const handleChange = (e) => {
     setEditedUser({ ...editedUser, [e.target.name]: e.target.value });
   };

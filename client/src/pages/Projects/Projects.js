@@ -1,3 +1,6 @@
+
+// Projects component for displaying a list of projects with filters and modal details.
+// Fetches project data from the API and renders project cards and modals.
 import React, { useEffect, useState } from 'react';
 import { getProjects } from '../../services/projectService';
 import './Projects.css';
@@ -79,6 +82,7 @@ const demoDislikes = {
   'Doctor Appointment Management System': 1
 };
 
+// Modal component for displaying detailed project information
 const ProjectModal = ({ project, onClose, onLike, onDislike, likeCount, dislikeCount }) => {
   const [rating, setRating] = useState(0);
   const [liked, setLiked] = useState(false);
@@ -223,6 +227,7 @@ const ProjectModal = ({ project, onClose, onLike, onDislike, likeCount, dislikeC
   );
 };
 
+// Renders the projects page with filters, project cards, and modal
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -234,7 +239,9 @@ const Projects = () => {
   const [likeCounts, setLikeCounts] = useState({ ...demoLikes });
   const [dislikeCounts, setDislikeCounts] = useState({ ...demoDislikes });
 
+  // Fetch project entries on component mount
   useEffect(() => {
+    // Fetches all projects from the API and updates state
     const fetchProjects = async () => {
       try {
         const res = await getProjects();
@@ -246,6 +253,7 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
+  // Handle like/dislike button clicks for projects
   const handleLike = (title, delta = 1) => {
     setLikeCounts(prev => ({ ...prev, [title]: Math.max(0, (prev[title] || 0) + delta) }));
   };
@@ -254,9 +262,9 @@ const Projects = () => {
   };
 
   
+  // Merge project data with extra static data for display
   const getProjectWithExtras = (project) => {
     const extra = projectExtraData[project.title] || {};
-  
     return {
       ...project,
       ...extra,

@@ -1,13 +1,20 @@
+
+// Skills component for displaying a list of skills.
+// Fetches skill data from the API and renders skill cards.
 // src/pages/Skills/Skills.js
 
 import React, { useEffect, useState } from 'react';
 import { getSkills } from '../../services/skillService';
 import './Skills.css';
 
+
+// Renders the skills page and skill cards
 const Skills = () => {
   const [skills, setSkills] = useState([]);
 
+  // Fetch skills on component mount
   useEffect(() => {
+    // Fetches all skills from the API and updates state
     const fetchSkills = async () => {
       try {
         const res = await getSkills();
@@ -16,7 +23,6 @@ const Skills = () => {
         console.error('Failed to fetch skills:', error);
       }
     };
-
     fetchSkills();
   }, []);
 

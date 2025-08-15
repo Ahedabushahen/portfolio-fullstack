@@ -1,9 +1,13 @@
+
+// Home component for displaying the portfolio landing page.
+// Shows profile, social links, and navigation to main sections.
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import profileImg from '../../assets/profile.jpg';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
+// Renders the home/landing page with profile, social links, and navigation cards
 const Home = () => {
   return (
     <div className="container py-5 home-page">
@@ -30,13 +34,10 @@ const Home = () => {
             <FaGithub size={32} color="#333" />
           </a>
         </div>
-        
         <h1 className="display-4 fw-bold text-primary">Welcome to My Portfolio</h1>
         <p className="lead text-muted">I’m a passionate fullstack developer creating modern and dynamic web applications.</p>
         <Link to="/projects" className="btn btn-primary btn-lg">Explore Projects</Link>
-        
       </div>
-
       <div className="row g-4 justify-content-center">
         <div className="col-md-5 col-lg-4">
           <div className="card h-100 border-0 shadow-lg home-card">

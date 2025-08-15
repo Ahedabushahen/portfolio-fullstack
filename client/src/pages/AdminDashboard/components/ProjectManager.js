@@ -66,6 +66,7 @@ const styles = {
   },
 };
 
+// ProjectManager component for managing projects (add, edit, delete) in the admin dashboard.
 const ProjectManager = () => {
   const [projects, setProjects] = useState([]);
   const [form, setForm] = useState({
@@ -77,19 +78,23 @@ const ProjectManager = () => {
   });
   const [editId, setEditId] = useState(null);
 
+  // Fetch projects on component mount
   useEffect(() => {
     fetchProjects();
   }, []);
 
+  // Fetches all projects from the API and updates state
   const fetchProjects = async () => {
     const res = await getProjects();
     setProjects(res.data);
   };
 
+  // Handle input changes for project form
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission for adding or updating a project
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -112,6 +117,7 @@ const ProjectManager = () => {
     fetchProjects();
   };
 
+  // Start editing a project
   const handleEdit = (project) => {
     setForm({
       title: project.title || '',
@@ -123,6 +129,7 @@ const ProjectManager = () => {
     setEditId(project.id);
   };
 
+  // Delete a project
   const handleDelete = async (id) => {
     await deleteProject(id);
     fetchProjects();

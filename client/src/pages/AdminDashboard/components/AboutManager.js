@@ -3,11 +3,14 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { getAbout, updateAbout, createAbout } from '../../../services/aboutService';
 
+// AboutManager component for managing the 'About' section content in the admin dashboard.
 const AboutManager = () => {
   const [info, setInfo] = useState('');
   const [aboutId, setAboutId] = useState(null);
 
+  // Fetch about info on component mount
   useEffect(() => {
+    // Fetches about info from the API and updates state
     const fetchAbout = async () => {
       try {
         const res = await getAbout();
@@ -19,10 +22,10 @@ const AboutManager = () => {
         console.error('Error fetching about info:', err);
       }
     };
-
     fetchAbout();
   }, []);
 
+  // Save or update about info
   const handleSave = async () => {
     try {
       if (aboutId) {

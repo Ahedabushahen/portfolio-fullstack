@@ -1,13 +1,20 @@
+
+// Blog component for displaying a list of blog posts.
+// Fetches blog data from the API and renders blog cards.
 // src/pages/Blog/Blog.js
 
 import React, { useEffect, useState } from 'react';
 import { getBlogs } from '../../services/blogService';
 import './Blog.css';
 
+
+// Renders the blog page and blog cards
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
 
+  // Fetch blog posts on component mount
   useEffect(() => {
+    // Fetches all blogs from the API and updates state
     const fetchBlogs = async () => {
       try {
         const res = await getBlogs();
@@ -16,7 +23,6 @@ const Blog = () => {
         console.error('Error fetching blogs:', error);
       }
     };
-
     fetchBlogs();
   }, []);
 

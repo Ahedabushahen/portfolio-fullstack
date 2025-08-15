@@ -66,24 +66,29 @@ const styles = {
   },
 };
 
+// SkillManager component for managing skills (add, edit, delete) in the admin dashboard.
 const SkillManager = () => {
   const [skills, setSkills] = useState([]);
   const [form, setForm] = useState({ name: '', level: '' });
   const [editId, setEditId] = useState(null);
 
+  // Fetch skills on component mount
   useEffect(() => {
     fetchSkills();
   }, []);
 
+  // Fetches all skills from the API and updates state
   const fetchSkills = async () => {
     const res = await getSkills();
     setSkills(res.data);
   };
 
+  // Handle input changes for skill form
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission for adding or updating a skill
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editId) {
@@ -96,11 +101,13 @@ const SkillManager = () => {
     fetchSkills();
   };
 
+  // Start editing a skill
   const handleEdit = (skill) => {
     setForm(skill);
     setEditId(skill.id);
   };
 
+  // Delete a skill
   const handleDelete = async (id) => {
     await deleteSkill(id);
     fetchSkills();

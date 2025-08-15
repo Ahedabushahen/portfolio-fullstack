@@ -1,3 +1,6 @@
+
+// AdminDashboard component for rendering the main admin dashboard layout and routing.
+// Includes sidebar, topbar, and all admin management pages.
 // src/pages/AdminDashboard/AdminDashboard.js
 
 import React from 'react';
@@ -18,6 +21,7 @@ import AboutManager from './components/AboutManager'; // ✅ Import added
 
 import './AdminDashboard.css';
 
+// Renders the admin dashboard layout with sidebar, topbar, and content routes
 const AdminDashboard = () => {
   return (
     <div className="admin-layout">
@@ -26,8 +30,10 @@ const AdminDashboard = () => {
         <AdminTopbar />
         <div className="admin-content">
           <Routes>
+            {/* Redirect root to about page */}
             <Route path="/" element={<Navigate to="/admin/about" />} />
-            <Route path="about" element={<AboutManager />} /> {/* ✅ Add this */}
+            {/* Admin management routes */}
+            <Route path="about" element={<AboutManager />} />
             <Route path="projects" element={<ProjectManager />} />
             <Route path="skills" element={<SkillManager />} />
             <Route path="education" element={<EducationManager />} />

@@ -1,11 +1,18 @@
+
+// Education component for displaying a list of education entries.
+// Fetches education data from the API and renders education cards.
 import React, { useEffect, useState } from 'react';
 import './Education.css';
 import { getEducation } from '../../services/educationService';
 
+
+// Renders the education page and education cards
 const Education = () => {
   const [educationList, setEducationList] = useState([]);
 
+  // Fetch education entries on component mount
   useEffect(() => {
+    // Fetches all education entries from the API and updates state
     const fetchEducation = async () => {
       try {
         const response = await getEducation();
@@ -14,7 +21,6 @@ const Education = () => {
         console.error('Failed to fetch education:', error);
       }
     };
-
     fetchEducation();
   }, []);
 
