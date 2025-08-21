@@ -84,7 +84,6 @@ const demoDislikes = {
 
 // Modal component for displaying detailed project information
 const ProjectModal = ({ project, onClose, onLike, onDislike, likeCount, dislikeCount }) => {
-  const [rating, setRating] = useState(0);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   if (!project) return null;
@@ -164,15 +163,7 @@ const ProjectModal = ({ project, onClose, onLike, onDislike, likeCount, dislikeC
         </div>
         <div className="modal-rating mb-3">
           <span className="me-2">Rate this project:</span>
-          {[1,2,3,4,5].map(star => (
-            <span
-              key={star}
-              className={`star${rating >= star ? ' filled' : ''}`}
-              onClick={() => setRating(star)}
-              style={{ cursor: 'pointer', fontSize: '1.5rem', color: rating >= star ? '#ffc107' : '#bbb' }}
-              title={`Rate ${star} star${star > 1 ? 's' : ''}`}
-            >★</span>
-          ))}
+       
           <button
             className={`like-btn ms-3${liked ? ' active' : ''}`}
             onClick={() => {

@@ -257,9 +257,9 @@ h2 {
 /* Rating and social share styles */
 .modal-rating {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
   font-size: 1.1rem;
+  padding-top: 20px
 }
 .star {
   cursor: pointer;
